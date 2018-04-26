@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/menu/menu.css">
+<div id="menu">
+    <div id="menu-btns">
+        <a href="/">Dashboard</a>
+        <a href="/mylinks">My Links</a>
+        <a href="/mystats">My Stats</a>
+        <a href="/createlinks">Create Links</a>
+    </div>
+</div>
+<script>
+    $("#menu-btns").children().each(function () {
+        if($(this).attr("href") === window.location.pathname) {
+            $(this).attr("page-active", true);
+        }
+    });
+</script>
