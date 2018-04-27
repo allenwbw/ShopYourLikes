@@ -12,6 +12,11 @@ import java.util.Map;
 public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String login(Model model, @RequestParam Map<String, String> map) {
+        return "login";
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model, @RequestParam Map<String, String> map) {
         return "dashboard";
     }
