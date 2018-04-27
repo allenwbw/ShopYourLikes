@@ -9,7 +9,7 @@
 </div>
 <script>
     $("#menu-btns").children().each(function () {
-        if($(this).attr("href") === window.location.pathname) {
+        if(window.location.pathname.startsWith($(this).attr("href"))) {
             $(this).attr("page-active", true);
         }
     });
