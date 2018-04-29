@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes;
+package com.ucla.shopyourlikes.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +12,7 @@ import java.util.Map;
 public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String login(Model model, @RequestParam Map<String, String> map) {
-        return "login";
-    }
+    public String login(Model model, @RequestParam Map<String, String> map) { return "login"; }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model, @RequestParam Map<String, String> map) {
@@ -35,5 +33,6 @@ public class MainController {
     public String createlinks(Model model, @RequestParam Map<String, String> map) {
         return "createlinks";
     }
+
 
 }
