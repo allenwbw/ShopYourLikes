@@ -4,27 +4,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <link href="/login/login.css" rel="stylesheet">
     <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
-<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="loginmodal-container">
-            <h1>Login to Your Account</h1><br>
-            <form>
-                <input type="text" name="user" placeholder="Username">
-                <input type="password" name="pass" placeholder="Password">
-                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-            </form>
-            <div class="login-help">
-                <a href="#">Register</a> - <a href="#">Forgot Password</a>
+    <div class="container">
+        <form id="loginForm" style="margin-left: 20%; margin-right: 20%; margin-top: 20%" >
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" name="username"  aria-describedby="emailHelp" placeholder="Username">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                login
+            </button>
+        </form>
     </div>
-</div>
-
+    <div id="result"></div>
 </body>
-</html>>
+<script>
+    $("#loginForm").submit(function(event) {
+        event.preventDefault();
+        var $form = $(this);
+        var username = $form.find("input[name='username']").val();
+        var password = $form.find("input[name='password']").val();
+        console.log("retreived\n");
+        console.log(username);
+        console.log(password);
+        formdata = {"username":username,"password":password};
+        $.ajax({
+            url: "/login",
+            type: "POST",
+            data: JSON.stringify(formdata),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                var content = $(data).find("#header");
+                $("#result").empty().append(content);
+            }
+        }).done(function (data, textStatus, xhr) {
+            var content = xhr.getResponseHeader('Authorization').substring(7);
+            $.ajax({
+                url: "/dashboard",
+                type: "GET",
+                beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',content)}
+            }).done(function (data) {$('html').html(data);});
+        });
+       
+    });
+</script>
+</html>
