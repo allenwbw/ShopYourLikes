@@ -27,36 +27,45 @@
             </button>
         </form>
     </div>
-    <div id="result"></div>
-</body>
-<script>
-    $("#loginForm").submit(function(event) {
-        event.preventDefault();
-        var $form = $(this);
-        var username = $form.find("input[name='username']").val();
-        var password = $form.find("input[name='password']").val();
-        console.log("retreived\n");
-        console.log(username);
-        console.log(password);
-        formdata = {"username":username,"password":password};
-        $.ajax({
-            url: "/login",
-            type: "POST",
-            data: JSON.stringify(formdata),
-            contentType: "application/json; charset=utf-8",
-            success: function(data) {
-                var content = $(data).find("#header");
-                $("#result").empty().append(content);
-            }
-        }).done(function (data, textStatus, xhr) {
-            var content = xhr.getResponseHeader('Authorization').substring(7);
+    <script>
+        $(document).ready(function(){
+        var JWT;
+        $("#loginForm").submit(function(event) {
+            event.preventDefault();
+            var $form = $(this);
+            var username = $form.find("input[name='username']").val();
+            var password = $form.find("input[name='password']").val();
+            console.log("retreived\n");
+            console.log(username);
+            console.log(password);
+            formdata = {"username":username,"password":password};
             $.ajax({
-                url: "/dashboard",
-                type: "GET",
-                beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',content)}
-            }).done(function (data) {$('html').html(data);});
+                url: "/login",
+                type: "POST",
+                data: JSON.stringify(formdata),
+                contentType: "application/json; charset=utf-8"
+                
+            }).done(function (data, textStatus, xhr) {
+                JWT = xhr.getResponseHeader('Authorization').substring(7);
+                $.ajax({
+                    url: "/dashboard",
+                    type: "GET",
+                    beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',JWT)}
+                }).done(function (data) {$('.container').empty().append(data);});
+            });   
         });
-       
+        $(document).on('click', 'a', function(event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            console.log(url)
+            $.ajax({
+                url: url,
+                type: "GET",
+                beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',JWT)}
+            }).done(function (data) {$('div.container').empty().append(data);});
+        });
     });
-</script>
+    </script>
+</body>
+
 </html>
