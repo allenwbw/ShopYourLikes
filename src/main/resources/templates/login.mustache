@@ -46,23 +46,10 @@
                 contentType: "application/json; charset=utf-8"
                 
             }).done(function (data, textStatus, xhr) {
-                JWT = xhr.getResponseHeader('Authorization').substring(7);
-                $.ajax({
-                    url: "/dashboard",
-                    type: "GET",
-                    beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',JWT)}
-                }).done(function (data) {$('.container').empty().append(data);});
+                JWT = xhr.getResponseHeader('Authorization');
+                document.cookie = "Authorization=" + JWT;
+                window.location.replace("/dashboard");
             });   
-        });
-        $(document).on('click', 'a', function(event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            console.log(url)
-            $.ajax({
-                url: url,
-                type: "GET",
-                beforeSend: function(xhr) {xhr.setRequestHeader('Authorization',JWT)}
-            }).done(function (data) {$('div.container').empty().append(data);});
         });
     });
     </script>
