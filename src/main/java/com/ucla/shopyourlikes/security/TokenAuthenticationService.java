@@ -36,11 +36,16 @@ public class TokenAuthenticationService {
         for (Cookie c : cookies) {
             if(c.getName().equals(HEADER_STRING)) {
                 String token = c.getValue();
-                String user = Jwts.parser()
-                        .setSigningKey(SECRET)
-                        .parseClaimsJws(token)
-                        .getBody().getSubject();
-                return user != null ? new UsernamePasswordAuthenticationToken(user, null, emptyList()) : null;
+                try {
+                    String user = Jwts.parser()
+                            .setSigningKey(SECRET)
+                            .parseClaimsJws(token)
+                            .getBody().getSubject();
+                    return user != null ? new UsernamePasswordAuthenticationToken(user, null, emptyList()) : null;
+                } catch (Exception e)
+                {
+                    return null;
+                }
             }
         }
         return null;

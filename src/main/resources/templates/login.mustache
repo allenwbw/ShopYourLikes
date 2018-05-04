@@ -23,8 +23,10 @@
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary">
-                login
+                Login
             </button>
+            <div class="form-error" style="color:darkred; margin-top:12px">
+            </div>
         </form>
     </div>
     <script>
@@ -32,12 +34,9 @@
         var JWT;
         $("#loginForm").submit(function(event) {
             event.preventDefault();
-            var $form = $(this);
-            var username = $form.find("input[name='username']").val();
-            var password = $form.find("input[name='password']").val();
-            console.log("retreived\n");
-            console.log(username);
-            console.log(password);
+            var form = $(this);
+            var username = form.find("input[name='username']").val();
+            var password = form.find("input[name='password']").val();
             formdata = {"username":username,"password":password};
             $.ajax({
                 url: "/login",
@@ -48,8 +47,11 @@
             }).done(function (data, textStatus, xhr) {
                 JWT = xhr.getResponseHeader('Authorization');
                 document.cookie = "Authorization=" + JWT;
-                window.location.replace("/dashboard");
-            });   
+                window.location.href = "/dashboard";
+            }).fail(function (data, textStatus, xhr) {
+                console.log("Login failure");
+                form.find("div[class='form-error']")[0].innerHTML = "<b>Wrong username/password</b>";
+            });
         });
     });
     </script>
