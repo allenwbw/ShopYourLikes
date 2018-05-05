@@ -1,11 +1,11 @@
-package com.ucla.ShopYourLikes.controller;
+package com.ucla.shopyourlikes.controller;
 
 
-import com.ucla.ShopYourLikes.payload.JwtAuthenticationResponse;
-import com.ucla.ShopYourLikes.payload.LoginRequest;
-import com.ucla.ShopYourLikes.repository.RoleRepository;
-import com.ucla.ShopYourLikes.repository.UserRepository;
-import com.ucla.ShopYourLikes.security.JwtTokenProvider;
+import com.ucla.shopyourlikes.payload.JwtAuthenticationResponse;
+import com.ucla.shopyourlikes.payload.LoginRequest;
+import com.ucla.shopyourlikes.repository.RoleRepository;
+import com.ucla.shopyourlikes.repository.UserRepository;
+import com.ucla.shopyourlikes.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

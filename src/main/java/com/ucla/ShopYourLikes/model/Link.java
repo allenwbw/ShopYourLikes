@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model;
+package com.ucla.shopyourlikes.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

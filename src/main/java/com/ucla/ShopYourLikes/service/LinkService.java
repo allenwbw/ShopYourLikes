@@ -1,14 +1,14 @@
-package com.ucla.ShopYourLikes.service;
+package com.ucla.shopyourlikes.service;
 
-import com.ucla.ShopYourLikes.exception.BadRequestException;
-import com.ucla.ShopYourLikes.model.Link;
-import com.ucla.ShopYourLikes.model.User;
-import com.ucla.ShopYourLikes.payload.LinkResponse;
-import com.ucla.ShopYourLikes.payload.PagedResponse;
-import com.ucla.ShopYourLikes.repository.LinkRepository;
-import com.ucla.ShopYourLikes.repository.UserRepository;
-import com.ucla.ShopYourLikes.util.AppConstants;
-import com.ucla.ShopYourLikes.util.ModelMapper;
+import com.ucla.shopyourlikes.exception.BadRequestException;
+import com.ucla.shopyourlikes.model.Link;
+import com.ucla.shopyourlikes.model.User;
+import com.ucla.shopyourlikes.payload.LinkResponse;
+import com.ucla.shopyourlikes.payload.PagedResponse;
+import com.ucla.shopyourlikes.repository.LinkRepository;
+import com.ucla.shopyourlikes.repository.UserRepository;
+import com.ucla.shopyourlikes.util.AppConstants;
+import com.ucla.shopyourlikes.util.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

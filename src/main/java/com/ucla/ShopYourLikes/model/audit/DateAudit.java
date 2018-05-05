@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model.audit;
+package com.ucla.shopyourlikes.model.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;

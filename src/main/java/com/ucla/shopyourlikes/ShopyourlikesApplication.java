@@ -1,12 +1,25 @@
-package com.ucla.shopyourlikes;
+package com.ucla.ShopYourLikes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
 
 @SpringBootApplication
-public class ShopyourlikesApplication {
+@EntityScan(basePackageClasses = {
+		ShopYourLikesApplication.class,
+		Jsr310JpaConverters.class
+})
 
+public class ShopYourLikesApplication {
+	@PostConstruct
+	void init() {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
 	public static void main(String[] args) {
-		SpringApplication.run(ShopyourlikesApplication.class, args);
+		SpringApplication.run(ShopYourLikesApplication.class, args);
 	}
 }

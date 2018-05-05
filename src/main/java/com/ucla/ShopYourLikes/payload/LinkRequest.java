@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.payload;
+package com.ucla.shopyourlikes.payload;
 
 import javax.validation.constraints.NotBlank;
 

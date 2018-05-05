@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes;
+package com.ucla.ShopYourLikes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ShopyourlikesApplicationTests {
+public class ShopYourLikesApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model;
+package com.ucla.shopyourlikes.model;
 
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;

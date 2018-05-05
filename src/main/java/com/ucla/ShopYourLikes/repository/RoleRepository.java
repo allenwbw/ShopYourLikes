@@ -1,7 +1,7 @@
-package com.ucla.ShopYourLikes.repository;
+package com.ucla.shopyourlikes.repository;
 
-import com.ucla.ShopYourLikes.model.Role;
-import com.ucla.ShopYourLikes.model.RoleName;
+import com.ucla.shopyourlikes.model.Role;
+import com.ucla.shopyourlikes.model.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

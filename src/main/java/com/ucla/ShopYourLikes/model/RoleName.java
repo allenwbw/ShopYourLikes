@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model;
+package com.ucla.shopyourlikes.model;
 
 public enum RoleName {
     ROLE_USER,

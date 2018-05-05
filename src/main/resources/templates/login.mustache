@@ -37,16 +37,15 @@
             var form = $(this);
             var username = form.find("input[name='username']").val();
             var password = form.find("input[name='password']").val();
-            formdata = {"username":username,"password":password};
+            formdata = {"userId":username,"apiKey":password};
             $.ajax({
-                url: "/login",
+                url: "/api/auth/signin",
                 type: "POST",
                 data: JSON.stringify(formdata),
                 contentType: "application/json; charset=utf-8"
                 
             }).done(function (data, textStatus, xhr) {
-                JWT = xhr.getResponseHeader('Authorization');
-                document.cookie = "Authorization=" + JWT;
+                document.cookie = "Authorization=" + data.accessToken;
                 window.location.href = "/dashboard";
             }).fail(function (data, textStatus, xhr) {
                 console.log("Login failure");

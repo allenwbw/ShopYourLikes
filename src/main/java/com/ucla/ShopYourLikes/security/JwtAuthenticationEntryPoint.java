@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.security;
+package com.ucla.shopyourlikes.security;
 
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.slf4j.Logger;

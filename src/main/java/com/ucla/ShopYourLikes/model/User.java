@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model;
+package com.ucla.shopyourlikes.model;
 //import com.ucla.ShopYourLikes.model.audit.DateAudit;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

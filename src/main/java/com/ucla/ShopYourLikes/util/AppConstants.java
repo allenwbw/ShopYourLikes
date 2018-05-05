@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.util;
+package com.ucla.shopyourlikes.util;
 
 public interface AppConstants {
     String DEFAULT_PAGE_NUMBER = "0";

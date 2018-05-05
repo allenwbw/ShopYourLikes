@@ -1,5 +1,5 @@
-package com.ucla.ShopYourLikes.repository;
-import com.ucla.ShopYourLikes.model.User;
+package com.ucla.shopyourlikes.repository;
+import com.ucla.shopyourlikes.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

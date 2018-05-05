@@ -1,8 +1,9 @@
-package com.ucla.ShopYourLikes.config;
+package com.ucla.shopyourlikes.config;
 
-import com.ucla.ShopYourLikes.security.CustomAuthenticationProvider;
-import com.ucla.ShopYourLikes.security.JwtAuthenticationEntryPoint;
-import com.ucla.ShopYourLikes.security.JwtAuthenticationFilter;
+import com.ucla.shopyourlikes.security.CustomAuthenticationProvider;
+import com.ucla.shopyourlikes.security.JwtAuthenticationEntryPoint;
+import com.ucla.shopyourlikes.security.JwtAuthenticationFilter;
+import com.ucla.shopyourlikes.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,10 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     @Override
@@ -76,8 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET, "/api/links/**","/api/users/**")
                     .permitAll()
                 .anyRequest()
-                    .authenticated();
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                    .authenticated()
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
     }

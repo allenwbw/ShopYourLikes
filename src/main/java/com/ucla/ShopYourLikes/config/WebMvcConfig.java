@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.config;
+package com.ucla.shopyourlikes.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.model;
+package com.ucla.shopyourlikes.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;

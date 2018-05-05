@@ -1,6 +1,6 @@
-package com.ucla.ShopYourLikes.security;
+package com.ucla.shopyourlikes.security;
 
-import com.ucla.ShopYourLikes.model.User;
+import com.ucla.shopyourlikes.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;

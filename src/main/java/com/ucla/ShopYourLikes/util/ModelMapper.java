@@ -1,8 +1,8 @@
-package com.ucla.ShopYourLikes.util;
+package com.ucla.shopyourlikes.util;
 
-import com.ucla.ShopYourLikes.model.Link;
-import com.ucla.ShopYourLikes.model.LinkId;
-import com.ucla.ShopYourLikes.payload.LinkResponse;
+import com.ucla.shopyourlikes.model.Link;
+import com.ucla.shopyourlikes.model.LinkId;
+import com.ucla.shopyourlikes.payload.LinkResponse;
 
 import java.time.Instant;
 

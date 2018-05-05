@@ -1,7 +1,7 @@
-package com.ucla.ShopYourLikes.repository;
+package com.ucla.shopyourlikes.repository;
 
-import com.ucla.ShopYourLikes.model.LinkId;
-import com.ucla.ShopYourLikes.model.Link;
+import com.ucla.shopyourlikes.model.LinkId;
+import com.ucla.shopyourlikes.model.Link;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

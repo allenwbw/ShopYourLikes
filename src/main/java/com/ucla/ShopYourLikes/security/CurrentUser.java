@@ -1,4 +1,4 @@
-package com.ucla.ShopYourLikes.security;
+package com.ucla.shopyourlikes.security;
 
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
