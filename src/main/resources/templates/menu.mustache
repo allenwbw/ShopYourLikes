@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/css/menu.css">
+<div id="menu">
+    <div class="nav" id="menu-btns">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/mylinks">My Links</a>
+        <a href="/mystats">My Stats</a>
+        <a href="/createlinks">Create Links</a>
+    </div>
+</div>
+<script>
+    $("#menu-btns").children().each(function () {
+        if(window.location.pathname.startsWith($(this).attr("href"))) {
+            $(this).attr("page-active", true);
+        }
+    });
+</script>
