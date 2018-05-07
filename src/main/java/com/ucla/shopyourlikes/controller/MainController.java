@@ -16,6 +16,11 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping(value = "/logoutSucceed", method = RequestMethod.GET)
+    public String logoutSucceed(Model model, @RequestParam Map<String, String> map) {
+        return "logoutSucceed";
+    }
+
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model, @RequestParam Map<String, String> map) {
         return "dashboard";
