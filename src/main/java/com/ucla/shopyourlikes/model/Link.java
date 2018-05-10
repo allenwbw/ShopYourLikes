@@ -1,4 +1,7 @@
 package com.ucla.shopyourlikes.model;
+import com.ucla.shopyourlikes.service.MerchantService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,6 +11,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "links")
 public class Link {
+
     @EmbeddedId
     private LinkId linkId;
 
@@ -33,9 +37,8 @@ public class Link {
     @Column(name = "original_url")
     private String originalUrl;
 
-    @NotNull
-    @Column(name = "merchant_id")
-    private Integer merchantId;
+    @OneToOne
+    private Merchant merchant;
 
     @Size(max = 30)
     private String name;
@@ -116,11 +119,11 @@ public class Link {
     }
 
     public Integer getMerchantId() {
-        return merchantId;
+        return merchant.getMerchantId();
     }
 
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 
     public String getName() {
