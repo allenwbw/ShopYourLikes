@@ -126,6 +126,8 @@ public class Link {
     }
 
     public Integer getMerchantId() {
+        if(merchant == null)
+            return -1;
         return merchant.getMerchantId();
     }
 
