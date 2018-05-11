@@ -1,22 +1,19 @@
 package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
-<<<<<<< HEAD
 import com.ucla.shopyourlikes.model.LinkId;
 import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
-=======
-import com.ucla.shopyourlikes.payload.CreateLinksResponse;
-import com.ucla.shopyourlikes.payload.LinkResponse;
-
->>>>>>> a92e89e25847548b9f22c077a78aca1e2127bd2c
 public class ModelMapper {
     public static LinkResponse mapLinkToLinkResponse(Link link){
         LinkResponse linkResponse = new LinkResponse();
@@ -57,5 +54,9 @@ public class ModelMapper {
     public static String extractHash(String url) {
         if(url.isEmpty()) return "";
         return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
+    }
+
+    public static String encodeUrl(String value) throws UnsupportedEncodingException{
+        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
     }
 }

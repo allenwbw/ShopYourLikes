@@ -66,17 +66,8 @@ public class LinksService {
 
     }
 
-    private String encodeValue(String value) {
-        String result = value;
-        try {
-            result = URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException e) {
-            logger.error("Unsupported encoding",e);
-        }
-        return result;
-    }
-
     public CreateLinksResponse createLinks(Object currentUser, List<String> urls) {
+
         User user = userRepository.findByUserId(Integer.parseInt(currentUser.toString()));
 
         List<GenerateLinkResponse> sylLinks = connexityService.createLinks(user, urls);
