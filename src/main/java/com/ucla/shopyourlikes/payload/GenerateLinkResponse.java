@@ -1,13 +1,10 @@
 package com.ucla.shopyourlikes.payload;
 
-import javax.validation.constraints.NotBlank;
-
-public class ConnexityCreateLinkResponse {
-
+public class GenerateLinkResponse {
     private String originalUrl;
     private String matchType;
-    private float ecpc;
-    private Integer publisherId;
+    private Integer ecpc;
+    private String publisherId;
     private String link;
 
     public String getOriginalUrl() {
@@ -26,19 +23,19 @@ public class ConnexityCreateLinkResponse {
         this.matchType = matchType;
     }
 
-    public float getEcpc() {
+    public Integer getEcpc() {
         return ecpc;
     }
 
-    public void setEcpc(float ecpc) {
+    public void setEcpc(Integer ecpc) {
         this.ecpc = ecpc;
     }
 
-    public Integer getPublisherId() {
+    public String getPublisherId() {
         return publisherId;
     }
 
-    public void setPublisherId(Integer publisherId) {
+    public void setPublisherId(String publisherId) {
         this.publisherId = publisherId;
     }
 
@@ -50,3 +47,4 @@ public class ConnexityCreateLinkResponse {
         this.link = link;
     }
 }
+
