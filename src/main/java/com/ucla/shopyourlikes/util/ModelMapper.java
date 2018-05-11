@@ -1,11 +1,8 @@
 package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
-import com.ucla.shopyourlikes.model.LinkId;
-import com.ucla.shopyourlikes.payload.CreateLinkResponse;
+import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
-
-import java.time.Instant;
 
 public class ModelMapper {
     public static LinkResponse mapLinkToLinkResponse(Link link){
@@ -23,8 +20,13 @@ public class ModelMapper {
         return linkResponse;
     }
 
-    public static CreateLinkResponse mapCreateLinkResponse(Object obj){
-        CreateLinkResponse createLinkResponse = new CreateLinkResponse();
+    public static CreateLinksResponse mapCreateLinkResponse(Object obj){
+        CreateLinksResponse createLinkResponse = new CreateLinksResponse();
         return createLinkResponse;
+    }
+
+    public static String extractHash(String url) {
+        if(url.isEmpty()) return "";
+        return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
     }
 }
