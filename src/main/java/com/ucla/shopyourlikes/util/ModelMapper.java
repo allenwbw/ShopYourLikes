@@ -1,6 +1,7 @@
 package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
+<<<<<<< HEAD
 import com.ucla.shopyourlikes.model.LinkId;
 import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
@@ -11,6 +12,11 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+=======
+import com.ucla.shopyourlikes.payload.CreateLinksResponse;
+import com.ucla.shopyourlikes.payload.LinkResponse;
+
+>>>>>>> a92e89e25847548b9f22c077a78aca1e2127bd2c
 public class ModelMapper {
     public static LinkResponse mapLinkToLinkResponse(Link link){
         LinkResponse linkResponse = new LinkResponse();
@@ -46,5 +52,10 @@ public class ModelMapper {
         link.setUrl(generateLinkResponse.getLink());
         link.setUserId(userId);
         return link;
+    }
+
+    public static String extractHash(String url) {
+        if(url.isEmpty()) return "";
+        return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
     }
 }
