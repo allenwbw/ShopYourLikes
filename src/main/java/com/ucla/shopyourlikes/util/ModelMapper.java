@@ -2,10 +2,14 @@ package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.LinkId;
-import com.ucla.shopyourlikes.payload.CreateLinkResponse;
+import com.ucla.shopyourlikes.payload.CreateLinksResponse;
+import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 
 public class ModelMapper {
     public static LinkResponse mapLinkToLinkResponse(Link link){
@@ -15,7 +19,7 @@ public class ModelMapper {
         linkResponse.setCreationDate(link.getCreationDate());
         linkResponse.setEarnings(link.getEarnings());
         linkResponse.setRedirects(link.getRedirects());
-        linkResponse.setEpc(link.getEpc());
+        linkResponse.setEcpc(link.getEcpc());
         linkResponse.setIgImageUrl(link.getIgImageUrl());
         linkResponse.setOriginalUrl(link.getOriginalUrl());
         linkResponse.setMerchantId(link.getMerchantId());
@@ -23,8 +27,24 @@ public class ModelMapper {
         return linkResponse;
     }
 
-    public static CreateLinkResponse mapCreateLinkResponse(Object obj){
-        CreateLinkResponse createLinkResponse = new CreateLinkResponse();
-        return createLinkResponse;
+    public static CreateLinksResponse mapCreateLinkResponse(Object obj){
+        CreateLinksResponse createLinksResponse = new CreateLinksResponse();
+        return createLinksResponse;
+    }
+
+    public static String sqlDateString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+        return dateFormat.format(date);
+    }
+
+    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId) {
+        Link link = new Link();
+        link.setCreationDate(sqlDateString(new Date()));
+        link.setEcpc(generateLinkResponse.getEcpc());
+        link.setEarnings(0.0f);
+        link.setOriginalUrl(generateLinkResponse.getOriginalUrl());
+        link.setUrl(generateLinkResponse.getLink());
+        link.setUserId(userId);
+        return link;
     }
 }

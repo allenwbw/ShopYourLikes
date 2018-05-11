@@ -1,5 +1,6 @@
 package com.ucla.shopyourlikes.model;
 import com.ucla.shopyourlikes.service.MerchantService;
+import com.ucla.shopyourlikes.util.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Link {
     private Float earnings;
 
     @NotNull
-    private Float epc;
+    private Integer ecpc;
 
     @Size(max = 30)
     @Column(name = "ig_image_url")
@@ -43,15 +44,13 @@ public class Link {
     @Size(max = 30)
     private String name;
 
-
-    private String url;
-
     public String getUrl() {
-        return url;
+        return "http://go.shopyourlikes.com/pi/" + linkId.getHash() + "?afId=" + linkId.getUserId();
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        String hash = ModelMapper.extractHash(url);
+        linkId.setHash(hash);
     }
 
     public Link() {
@@ -78,9 +77,7 @@ public class Link {
         return linkId.getHash();
     }
 
-    public void setHash(String hash){
-        linkId.setHash(hash);
-    }
+    public void setHash(String hash){ linkId.setHash(hash); }
 
     public String getCreationDate() {
         return creationDate;
@@ -106,12 +103,10 @@ public class Link {
         this.earnings = earnings;
     }
 
-    public Float getEpc() {
-        return epc;
-    }
+    public Integer getEcpc() { return ecpc; }
 
-    public void setEpc(Float epc) {
-        this.epc = epc;
+    public void setEcpc(Integer ecpc) {
+        this.ecpc = ecpc;
     }
 
     public String getIgImageUrl() {

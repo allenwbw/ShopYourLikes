@@ -8,7 +8,7 @@ public class LinkResponse {
     private String creationDate;
     private Integer redirects;
     private Float earnings;
-    private Float epc;
+    private Integer ecpc;
     private String igImageUrl;
     private String originalUrl;
     private Integer merchantId;
@@ -54,12 +54,12 @@ public class LinkResponse {
         this.earnings = earnings;
     }
 
-    public Float getEpc() {
-        return epc;
+    public Integer getEcpc() {
+        return ecpc;
     }
 
-    public void setEpc(Float epc) {
-        this.epc = epc;
+    public void setEcpc(Integer ecpc) {
+        this.ecpc = ecpc;
     }
 
     public String getIgImageUrl() {
