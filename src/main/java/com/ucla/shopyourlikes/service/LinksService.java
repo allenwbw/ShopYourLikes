@@ -70,6 +70,9 @@ public class LinksService {
 
         User user = userRepository.findByUserId(Integer.parseInt(currentUser.toString()));
 
+        if(user == null)
+            return null;
+
         List<GenerateLinkResponse> sylLinks = connexityService.createLinks(user, urls);
 
         for(GenerateLinkResponse res : sylLinks)

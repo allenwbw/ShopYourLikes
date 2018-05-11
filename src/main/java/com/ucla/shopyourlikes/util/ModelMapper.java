@@ -36,7 +36,7 @@ public class ModelMapper {
     }
 
     public static String sqlDateString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return dateFormat.format(date);
     }
 
@@ -48,6 +48,7 @@ public class ModelMapper {
         link.setOriginalUrl(generateLinkResponse.getOriginalUrl());
         link.setUrl(generateLinkResponse.getLink());
         link.setUserId(userId);
+        link.setRedirects(0);
         return link;
     }
 

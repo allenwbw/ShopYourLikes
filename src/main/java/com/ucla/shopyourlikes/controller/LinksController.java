@@ -1,6 +1,7 @@
 package com.ucla.shopyourlikes.controller;
 
 import com.ucla.shopyourlikes.payload.CreateLinksRequest;
+import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
 import com.ucla.shopyourlikes.payload.PagedResponse;
 import com.ucla.shopyourlikes.security.CurrentUser;
@@ -30,6 +31,9 @@ public class LinksController {
     @PostMapping("/create")
     public ResponseEntity<?> generateLinks(@CurrentUser Object currentUser,
                                            @Valid @RequestBody CreateLinksRequest request) {
-        return ResponseEntity.ok(linksService.createLinks(currentUser, request.getUrls()));
+        CreateLinksResponse createLinksResponse = linksService.createLinks(currentUser, request.getUrls());
+        if(createLinksResponse != null)
+            return ResponseEntity.ok(linksService.createLinks(currentUser, request.getUrls()));
+        return  ResponseEntity.badRequest().build();
     }
 }
