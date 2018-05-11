@@ -2,6 +2,7 @@ package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
+import com.ucla.shopyourlikes.util.ModelMapper;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class ConnexityService {
 
     private static final Logger logger = LoggerFactory.getLogger(ConnexityService.class);
 
-    public List<GenerateLinkResponse> connexityRequest(User user, List<String> urls) {
+    public List<GenerateLinkResponse> createLinks(User user, List<String> urls) {
 
         List<GenerateLinkResponse> sylLinks = new ArrayList<>();
 
@@ -37,7 +39,12 @@ public class ConnexityService {
 
         for (String url : urls){
             GenerateLinkResponse response = new GenerateLinkResponse();
-            String reqUrl = baseUrl+encodeValue(url)+"&publisherId="+publisherid+"&apiKey="+apiKey;
+            String reqUrl;
+            try {
+                reqUrl = baseUrl + ModelMapper.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
+            } catch (UnsupportedEncodingException e) {
+                continue;
+            }
             try {
                 response = restTemplate.getForObject(reqUrl, GenerateLinkResponse.class);
             } catch (HttpClientErrorException ce) {
