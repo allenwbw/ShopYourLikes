@@ -1,6 +1,8 @@
 package com.ucla.shopyourlikes.model;
 import com.ucla.shopyourlikes.service.MerchantService;
 import com.ucla.shopyourlikes.util.ModelMapper;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -29,19 +31,17 @@ public class Link {
     @NotNull
     private Integer ecpc;
 
-    @Size(max = 30)
     @Column(name = "ig_image_url")
     private String igImageUrl;
 
     @NotNull
-    @Size(max = 100)
     @Column(name = "original_url")
     private String originalUrl;
 
-    @OneToOne
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Merchant merchant;
 
-    @Size(max = 30)
     private String name;
 
     public String getUrl() {

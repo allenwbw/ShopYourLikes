@@ -2,9 +2,11 @@ package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.Link;
+import com.ucla.shopyourlikes.model.Merchant;
 import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.*;
 import com.ucla.shopyourlikes.repository.LinkRepository;
+import com.ucla.shopyourlikes.repository.MerchantRepository;
 import com.ucla.shopyourlikes.repository.UserRepository;
 import com.ucla.shopyourlikes.util.AppConstants;
 import com.ucla.shopyourlikes.util.ModelMapper;
@@ -31,6 +33,9 @@ public class LinksService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MerchantRepository merchantRepository;
 
     @Autowired
     private ConnexityService connexityService;
@@ -77,9 +82,17 @@ public class LinksService {
 
         for(GenerateLinkResponse res : sylLinks)
         {
-            Link link = ModelMapper.mapGenerateLinkRepsonse(res, user.getUserId());
-            linkRepository.saveAndFlush(link);
+            String domain = ModelMapper.extractDomain(res.getOriginalUrl());
+
+            System.out.println(res.getOriginalUrl());
+            System.out.println(domain);
+
+            Merchant merchant = merchantRepository.getMerchantByMerchantUrl(domain);
+
+            Link link = ModelMapper.mapGenerateLinkRepsonse(res, user.getUserId(), merchant);
+            linkRepository.save(link);
         }
+        linkRepository.flush();
 
         CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylLinks);
         return createLinksResponse;

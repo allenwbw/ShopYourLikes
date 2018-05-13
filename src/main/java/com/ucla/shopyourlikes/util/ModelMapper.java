@@ -2,11 +2,17 @@ package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.LinkId;
+import com.ucla.shopyourlikes.model.Merchant;
+import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
 import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
 
+import javax.swing.*;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
@@ -40,7 +46,7 @@ public class ModelMapper {
         return dateFormat.format(date);
     }
 
-    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId) {
+    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId, Merchant merchant) {
         Link link = new Link();
         link.setCreationDate(sqlDateString(new Date()));
         link.setEcpc(generateLinkResponse.getEcpc());
@@ -49,6 +55,8 @@ public class ModelMapper {
         link.setUrl(generateLinkResponse.getLink());
         link.setUserId(userId);
         link.setRedirects(0);
+        if(merchant != null)
+            link.setMerchant(merchant);
         return link;
     }
 
@@ -57,7 +65,33 @@ public class ModelMapper {
         return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
     }
 
+    public static String extractDomain(String url) {
+
+        try {
+            url = URLDecoder.decode(url, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+
+        URI uri;
+        try {
+            uri = new URI(url);
+        } catch (URISyntaxException e) {
+            return null;
+        }
+
+        return uri.getHost();
+    }
+
     public static String encodeUrl(String value) throws UnsupportedEncodingException{
         return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+    }
+
+    public static Merchant mapActiveMerchantResponse(ActiveMerchantResponse response) {
+        Merchant merchant = new Merchant();
+        merchant.setMerchantId(response.getMerchantId());
+        merchant.setMerchantName(response.getMerchantName());
+        merchant.setMerchantUrl(extractDomain(response.getMerchantUrl()));
+        return merchant;
     }
 }

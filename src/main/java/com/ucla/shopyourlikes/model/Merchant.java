@@ -13,24 +13,20 @@ import java.util.Set;
 @Entity
 @Table(name = "merchants")
 public class Merchant{
+
     @Id
-    @NotBlank
     @Column(name = "merchant_id")
     private Integer merchantId;
 
+    @NotBlank
     @NotNull
-    @Size(max = 50)
     @Column(name = "merchant_name")
     private String merchantName;
 
-    public Merchant() {
-
-    }
-
-    public Merchant(Integer merchantId, String merchantName){
-        this.merchantId = merchantId;
-        this.merchantName = merchantName;
-    }
+    @NotBlank
+    @NotNull
+    @Column(name = "merchant_url")
+    private String merchantUrl;
 
     public Integer getMerchantId() {
         return merchantId;
@@ -47,4 +43,8 @@ public class Merchant{
     public void setMerchantName(String merchantName){
         this.merchantName = merchantName;
     }
+
+    public String getMerchantUrl() { return merchantUrl; }
+
+    public void setMerchantUrl(String merchantUrl) { this.merchantUrl = merchantUrl; }
 }
