@@ -1,16 +1,26 @@
-<link rel="stylesheet" href="/css/menu.css">
-<div id="menu">
-    <div class="nav" id="menu-btns">
-        <a href="/dashboard">Dashboard</a>
-        <a href="/mylinks">My Links</a>
-        <a href="/mystats">My Stats</a>
-        <a href="/createlinks">Create Links</a>
-    </div>
+
+<div id="sidebar-wrapper" class="row-offcanvas row-offcanvas-left">
+  <div id="sidebar" class="sidebar-offcanvas">
+      <div class="col-md-12">
+        <h3>Sidebar (fixed)</h3>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/mylinks">My Links</a></li>
+          <li><a href="/mystats">My Stats</a></li>
+          <li><a href="/createlinks">Create Links</a></li>
+        </ul>
+      </div>
+  </div>
 </div>
 <script>
-    $("#menu-btns").children().each(function () {
-        if(window.location.pathname.startsWith($(this).attr("href"))) {
-            $(this).attr("page-active", true);
-        }
-    });
+    // $("#menu-btns").children().each(function () {
+    //     if(window.location.pathname.startsWith($(this).attr("href"))) {
+    //         $(this).attr("page-active", true);
+    //     }
+    // });
+    $(document).ready(function() {
+  $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+});
 </script>
