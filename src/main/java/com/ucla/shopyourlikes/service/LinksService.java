@@ -11,6 +11,7 @@ import com.ucla.shopyourlikes.repository.MerchantRepository;
 import com.ucla.shopyourlikes.repository.UserRepository;
 import com.ucla.shopyourlikes.util.AppConstants;
 import com.ucla.shopyourlikes.util.ModelMapper;
+import com.ucla.shopyourlikes.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import  org.springframework.data.domain.Pageable;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -84,7 +82,7 @@ public class LinksService {
 
         for(GenerateLinkResponse res : sylLinks)
         {
-            MerchantHost host = ModelMapper.extractHost(res.getOriginalUrl());
+            MerchantHost host = Utils.extractHost(res.getOriginalUrl());
 
             Merchant merchant = merchantRepository.getMerchantByMerchantHost(host);
 

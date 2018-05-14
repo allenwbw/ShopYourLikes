@@ -4,7 +4,7 @@ import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.GetMerchantsResponse;
-import com.ucla.shopyourlikes.util.ModelMapper;
+import com.ucla.shopyourlikes.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class ConnexityService {
             GenerateLinkResponse response = new GenerateLinkResponse();
             String reqUrl;
             try {
-                reqUrl = baseUrl + ModelMapper.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
+                reqUrl = baseUrl + Utils.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
             } catch (UnsupportedEncodingException e) {
                 continue;
             }

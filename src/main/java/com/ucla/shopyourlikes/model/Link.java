@@ -1,14 +1,10 @@
 package com.ucla.shopyourlikes.model;
-import com.ucla.shopyourlikes.service.MerchantService;
-import com.ucla.shopyourlikes.util.ModelMapper;
+import com.ucla.shopyourlikes.util.Utils;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 
 
 @Entity
@@ -49,7 +45,7 @@ public class Link {
     }
 
     public void setUrl(String url) {
-        String hash = ModelMapper.extractHash(url);
+        String hash = Utils.extractHash(url);
         linkId.setHash(hash);
     }
 
