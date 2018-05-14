@@ -32,7 +32,7 @@ public class ModelMapper {
         linkResponse.setEcpc(link.getEcpc());
         linkResponse.setIgImageUrl(link.getIgImageUrl());
         linkResponse.setOriginalUrl(link.getOriginalUrl());
-        linkResponse.setMerchantId(link.getMerchantId());
+        linkResponse.setMerchantName(link.getMerchantName());
         linkResponse.setName(link.getName());
         return linkResponse;
     }

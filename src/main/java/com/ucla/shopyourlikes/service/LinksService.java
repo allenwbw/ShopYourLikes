@@ -80,6 +80,7 @@ public class LinksService {
             return null;
 
         List<GenerateLinkResponse> sylLinks = connexityService.createLinks(user, urls);
+        List<LinkResponse> sylRes = new ArrayList<LinkResponse>();
 
         for(GenerateLinkResponse res : sylLinks)
         {
@@ -88,11 +89,15 @@ public class LinksService {
             Merchant merchant = merchantRepository.getMerchantByMerchantHost(host);
 
             Link link = ModelMapper.mapGenerateLinkRepsonse(res, user.getUserId(), merchant);
+
+            LinkResponse linkRes = ModelMapper.mapLinkToLinkResponse(link);
+            sylRes.add(linkRes);
+
             linkRepository.save(link);
         }
         linkRepository.flush();
 
-        CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylLinks);
+        CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylRes);
         return createLinksResponse;
 
     }

@@ -4,18 +4,18 @@ package com.ucla.shopyourlikes.payload;
 import java.util.List;
 
 public class CreateLinksResponse {
-    private List<GenerateLinkResponse> generatedLinks;
+    private List<LinkResponse> generatedLinks;
 
     public CreateLinksResponse(){}
-    public CreateLinksResponse(List<GenerateLinkResponse> generatedLinks){
+    public CreateLinksResponse(List<LinkResponse> generatedLinks){
         this.generatedLinks = generatedLinks;
     }
 
-    public List<GenerateLinkResponse> getGeneratedLinks() {
+    public List<LinkResponse> getGeneratedLinks() {
         return generatedLinks;
     }
 
-    public void setGeneratedLinks(List<GenerateLinkResponse> generatedLinks) {
+    public void setGeneratedLinks(List<LinkResponse> generatedLinks) {
         this.generatedLinks = generatedLinks;
     }
 }

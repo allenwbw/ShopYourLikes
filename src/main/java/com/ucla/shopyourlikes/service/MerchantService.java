@@ -38,7 +38,6 @@ public class MerchantService {
     private void init()
     {
         List<ActiveMerchantResponse> merchants = connexityService.getMerchants("US");
-        merchantRepository.deleteAllInBatch();
 
         for(ActiveMerchantResponse m : merchants)
         {

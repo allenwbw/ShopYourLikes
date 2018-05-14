@@ -131,6 +131,12 @@ public class Link {
         return merchant.getMerchantId();
     }
 
+    public String getMerchantName() {
+        if(merchant == null)
+            return "None";
+        return merchant.getMerchantName();
+    }
+
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
     }
