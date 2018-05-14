@@ -1,8 +1,11 @@
 package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.model.User;
+import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
-import com.ucla.shopyourlikes.util.ModelMapper;
+import com.ucla.shopyourlikes.payload.GetMerchantsResponse;
+import com.ucla.shopyourlikes.util.Utils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,12 @@ import java.util.List;
 public class ConnexityService {
 
     private static final Logger logger = LoggerFactory.getLogger(ConnexityService.class);
+
+    @Value("${app.publisherId}")
+    private String rootPublisherId;
+
+    @Value("${app.apiKey}")
+    private String rootApiKey;
 
     public List<GenerateLinkResponse> createLinks(User user, List<String> urls) {
 
@@ -41,7 +50,7 @@ public class ConnexityService {
             GenerateLinkResponse response = new GenerateLinkResponse();
             String reqUrl;
             try {
-                reqUrl = baseUrl + ModelMapper.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
+                reqUrl = baseUrl + Utils.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
             } catch (UnsupportedEncodingException e) {
                 continue;
             }
@@ -54,5 +63,28 @@ public class ConnexityService {
         }
 
         return sylLinks;
+    }
+
+    public List<ActiveMerchantResponse> getMerchants(String countryCode)
+    {
+        List<ActiveMerchantResponse> merchants = new ArrayList<>();
+
+        String baseUrl = "http://api.shopyourlikes.com/api/activeMerchants";
+
+        RestTemplate restTemplate = new RestTemplate();
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        messageConverters.add(new MappingJackson2HttpMessageConverter());
+
+        GetMerchantsResponse response = new GetMerchantsResponse();
+
+        String reqUrl = baseUrl + "?publisherId=" + rootPublisherId + "&apiKey=" + rootApiKey + "&countryCode=" + countryCode;
+
+        try {
+            response = restTemplate.getForObject(reqUrl, GetMerchantsResponse.class);
+        } catch (HttpClientErrorException e) {
+            logger.error("Fail to contact SYL server", e);
+        }
+
+        return response.getActiveMerchantsResponse();
     }
 }

@@ -11,8 +11,8 @@ public class LinkResponse {
     private Integer ecpc;
     private String igImageUrl;
     private String originalUrl;
-    private Integer merchantId;
     private String name;
+    private String merchantName;
 
     public Integer getUserId() {
         return userId;
@@ -78,14 +78,6 @@ public class LinkResponse {
         this.originalUrl = originalUrl;
     }
 
-    public Integer getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
-    }
-
     public String getName() {
         return name;
     }
@@ -93,4 +85,8 @@ public class LinkResponse {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getMerchantName() { return merchantName; }
+
+    public void setMerchantName(String merchantName) { this.merchantName = merchantName; }
 }

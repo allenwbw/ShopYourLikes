@@ -1,12 +1,10 @@
 package com.ucla.shopyourlikes.model;
-import com.ucla.shopyourlikes.service.MerchantService;
-import com.ucla.shopyourlikes.util.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ucla.shopyourlikes.util.Utils;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 
 
 @Entity
@@ -29,19 +27,17 @@ public class Link {
     @NotNull
     private Integer ecpc;
 
-    @Size(max = 30)
     @Column(name = "ig_image_url")
     private String igImageUrl;
 
     @NotNull
-    @Size(max = 100)
     @Column(name = "original_url")
     private String originalUrl;
 
-    @OneToOne
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Merchant merchant;
 
-    @Size(max = 30)
     private String name;
 
     public String getUrl() {
@@ -49,7 +45,7 @@ public class Link {
     }
 
     public void setUrl(String url) {
-        String hash = ModelMapper.extractHash(url);
+        String hash = Utils.extractHash(url);
         linkId.setHash(hash);
     }
 
@@ -129,6 +125,12 @@ public class Link {
         if(merchant == null)
             return -1;
         return merchant.getMerchantId();
+    }
+
+    public String getMerchantName() {
+        if(merchant == null)
+            return "None";
+        return merchant.getMerchantName();
     }
 
     public void setMerchant(Merchant merchant) {

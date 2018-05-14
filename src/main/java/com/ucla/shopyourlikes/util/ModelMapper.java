@@ -1,17 +1,12 @@
 package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
-import com.ucla.shopyourlikes.model.LinkId;
+import com.ucla.shopyourlikes.model.Merchant;
+import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
 import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.LinkResponse;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 
 public class ModelMapper {
@@ -25,7 +20,7 @@ public class ModelMapper {
         linkResponse.setEcpc(link.getEcpc());
         linkResponse.setIgImageUrl(link.getIgImageUrl());
         linkResponse.setOriginalUrl(link.getOriginalUrl());
-        linkResponse.setMerchantId(link.getMerchantId());
+        linkResponse.setMerchantName(link.getMerchantName());
         linkResponse.setName(link.getName());
         return linkResponse;
     }
@@ -35,29 +30,25 @@ public class ModelMapper {
         return createLinksResponse;
     }
 
-    public static String sqlDateString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        return dateFormat.format(date);
-    }
-
-    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId) {
+    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId, Merchant merchant) {
         Link link = new Link();
-        link.setCreationDate(sqlDateString(new Date()));
+        link.setCreationDate(Utils.sqlDateString(new Date()));
         link.setEcpc(generateLinkResponse.getEcpc());
         link.setEarnings(0.0f);
         link.setOriginalUrl(generateLinkResponse.getOriginalUrl());
         link.setUrl(generateLinkResponse.getLink());
         link.setUserId(userId);
         link.setRedirects(0);
+        if(merchant != null)
+            link.setMerchant(merchant);
         return link;
     }
 
-    public static String extractHash(String url) {
-        if(url.isEmpty()) return "";
-        return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
-    }
-
-    public static String encodeUrl(String value) throws UnsupportedEncodingException{
-        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+    public static Merchant mapActiveMerchantResponse(ActiveMerchantResponse response) {
+        Merchant merchant = new Merchant();
+        merchant.setMerchantId(response.getMerchantId());
+        merchant.setMerchantName(response.getMerchantName());
+        merchant.setMerchantHost(Utils.extractHost(response.getMerchantUrl()));
+        return merchant;
     }
 }

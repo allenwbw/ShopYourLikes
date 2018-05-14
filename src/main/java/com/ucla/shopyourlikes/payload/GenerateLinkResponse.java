@@ -6,6 +6,7 @@ public class GenerateLinkResponse {
     private Integer ecpc;
     private String publisherId;
     private String link;
+    private String merchantName;
 
     public String getOriginalUrl() {
         return originalUrl;
@@ -46,5 +47,9 @@ public class GenerateLinkResponse {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public String getMerchantName() { return merchantName; }
+
+    public void setMerchantName(String merchantName) { this.merchantName = merchantName; }
 }
 

@@ -2,12 +2,16 @@ package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.Link;
+import com.ucla.shopyourlikes.model.Merchant;
+import com.ucla.shopyourlikes.model.MerchantHost;
 import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.*;
 import com.ucla.shopyourlikes.repository.LinkRepository;
+import com.ucla.shopyourlikes.repository.MerchantRepository;
 import com.ucla.shopyourlikes.repository.UserRepository;
 import com.ucla.shopyourlikes.util.AppConstants;
 import com.ucla.shopyourlikes.util.ModelMapper;
+import com.ucla.shopyourlikes.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +21,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import  org.springframework.data.domain.Pageable;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +32,9 @@ public class LinksService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MerchantRepository merchantRepository;
 
     @Autowired
     private ConnexityService connexityService;
@@ -74,14 +78,24 @@ public class LinksService {
             return null;
 
         List<GenerateLinkResponse> sylLinks = connexityService.createLinks(user, urls);
+        List<LinkResponse> sylRes = new ArrayList<LinkResponse>();
 
         for(GenerateLinkResponse res : sylLinks)
         {
-            Link link = ModelMapper.mapGenerateLinkRepsonse(res, user.getUserId());
-            linkRepository.saveAndFlush(link);
-        }
+            MerchantHost host = Utils.extractHost(res.getOriginalUrl());
 
-        CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylLinks);
+            Merchant merchant = merchantRepository.getMerchantByMerchantHost(host);
+
+            Link link = ModelMapper.mapGenerateLinkRepsonse(res, user.getUserId(), merchant);
+
+            LinkResponse linkRes = ModelMapper.mapLinkToLinkResponse(link);
+            sylRes.add(linkRes);
+
+            linkRepository.save(link);
+        }
+        linkRepository.flush();
+
+        CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylRes);
         return createLinksResponse;
 
     }
