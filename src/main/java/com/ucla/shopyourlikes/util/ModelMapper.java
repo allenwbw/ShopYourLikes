@@ -3,6 +3,7 @@ package com.ucla.shopyourlikes.util;
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.LinkId;
 import com.ucla.shopyourlikes.model.Merchant;
+import com.ucla.shopyourlikes.model.MerchantHost;
 import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
 import com.ucla.shopyourlikes.payload.CreateLinksResponse;
 import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
@@ -65,7 +66,7 @@ public class ModelMapper {
         return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
     }
 
-    public static String extractDomain(String url) {
+    public static MerchantHost extractHost(String url) {
 
         try {
             url = URLDecoder.decode(url, StandardCharsets.UTF_8.toString());
@@ -80,7 +81,17 @@ public class ModelMapper {
             return null;
         }
 
-        return uri.getHost();
+        String[] h = uri.getHost().toLowerCase().split("\\.");
+        int l = h.length;
+
+        MerchantHost host = new MerchantHost();
+        host.setMerchantDomain(h[l-2]);
+        host.setMerchantTld(h[l-1]);
+
+        System.out.println(host.getMerchantDomain());
+        System.out.println(host.getMerchantTld());
+
+        return host;
     }
 
     public static String encodeUrl(String value) throws UnsupportedEncodingException{
@@ -91,7 +102,7 @@ public class ModelMapper {
         Merchant merchant = new Merchant();
         merchant.setMerchantId(response.getMerchantId());
         merchant.setMerchantName(response.getMerchantName());
-        merchant.setMerchantUrl(extractDomain(response.getMerchantUrl()));
+        merchant.setMerchantHost(extractHost(response.getMerchantUrl()));
         return merchant;
     }
 }

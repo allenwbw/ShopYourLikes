@@ -1,6 +1,7 @@
 package com.ucla.shopyourlikes.repository;
 
 import com.ucla.shopyourlikes.model.Merchant;
+import com.ucla.shopyourlikes.model.MerchantHost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,7 @@ public interface MerchantRepository extends JpaRepository<Merchant, Long> {
 
     Merchant getByMerchantId(Integer merchantId);
 
-    Merchant getMerchantByMerchantUrl(String url);
+    Merchant getMerchantByMerchantHost(MerchantHost host);
 
     void deleteAllInBatch();
 }

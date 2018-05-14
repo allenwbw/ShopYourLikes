@@ -23,10 +23,9 @@ public class Merchant{
     @Column(name = "merchant_name")
     private String merchantName;
 
-    @NotBlank
+    @Embedded
     @NotNull
-    @Column(name = "merchant_url")
-    private String merchantUrl;
+    private MerchantHost merchantHost;
 
     public Integer getMerchantId() {
         return merchantId;
@@ -44,7 +43,9 @@ public class Merchant{
         this.merchantName = merchantName;
     }
 
-    public String getMerchantUrl() { return merchantUrl; }
+    public MerchantHost getMerchantHost() { return merchantHost; }
 
-    public void setMerchantUrl(String merchantUrl) { this.merchantUrl = merchantUrl; }
+    public void setMerchantHost(MerchantHost merchantHost) { this.merchantHost = merchantHost; }
+
+
 }
