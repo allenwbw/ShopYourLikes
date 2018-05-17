@@ -41,6 +41,9 @@ public class Utils {
         String[] h = uri.getHost().toLowerCase().split("\\.");
         int l = h.length;
 
+        if(l < 2)
+            return null;
+
         MerchantHost host = new MerchantHost();
         host.setMerchantDomain(h[l-2]);
         host.setMerchantTld(h[l-1]);
