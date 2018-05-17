@@ -1,8 +1,10 @@
 # Shop Your Likes Journal Server
 
 The back-end RESTful api server for the Shop Your Likes Journal web application.
-The front-end application is maintained at https://github.com/allenwbw/shopyourlikes-frontend
-You can find a live demo of the application here http://cs130.syljournel.com
+
+The front-end application is maintained at <https://github.com/allenwbw/shopyourlikes-frontend>
+
+You can find a live demo of the application here <http://cs130.syljournel.com>
 
 ## Getting Started
 
@@ -14,9 +16,11 @@ You need JDK version 10 and MySQL to run and build this application.
 
 ### Setting up MySQL
 1. **Create MySQL database**
-    ```bash
-    create database TEST
+
     ```
+    create database SHOPYOURLIKES;
+    ```
+
 2. **Change MySQL username and password as per your MySQL installation (root account)**
 
     + open `src/main/resources/application.properties`
@@ -24,13 +28,11 @@ You need JDK version 10 and MySQL to run and build this application.
 
 
 ### Running the app
+You can run the back-end app by using the following command under the root directory of the app
 
-    You can run the back-end app by using the following command under the root directory of the app
-
-    ```bash
     mvn spring-boot:run
-    ```
-    The server will start on port 5000.
+
+The server will start on port 5000.
     
     
 ## Running the tests
@@ -55,9 +57,11 @@ Give an example
 ## Deployment
 
 Build the app with the following command
-```bash
+
+```
 mvn package
 ```
+
 The built jar file will be in the directory `target/ShopYourLikes-0.0.1-SNAPSHOT.jar`
 
 The jar file will be deployable to any machine with JDK 10 installed.
@@ -66,6 +70,8 @@ The jar file will be deployable to any machine with JDK 10 installed.
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
+* [Spring Boot](https://projects.spring.io/spring-boot/) - Spring application boostrapper
+
 ## Authors
 
 * **Bowei Wang** 
@@ -73,3 +79,4 @@ The jar file will be deployable to any machine with JDK 10 installed.
 * **Qinhao Xu** 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
