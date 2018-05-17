@@ -1,31 +1,59 @@
 package com.ucla.shopyourlikes.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.junit.Assert.*;
 
+import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.User;
+import com.ucla.shopyourlikes.payload.UserSummary;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 // TODO: will add more testcase
-@RunWith(SpringRunner.class)
-@SpringBootTest
+
 public class testUserController {
 
-    @Autowired
+    @Mock
     private UserController userController;
 
+    @Before
+    public void setupMock() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
-    public void contextLoads() throws Exception {
-        assertThat(userController).isNotNull();
+    public void testMockCreation() {
+        assertNotNull(userController);
+    }
+
+    @Test
+    public void testGetCurrentUser() {
+        User user = new User();
+        user.setUserId(1000);
+        user.setApiKey("10000");
+
+        List<Link> f =  new ArrayList<>();
+        Link link = new Link();
+
+        link.setRedirects(100);
+        link.setUrl("http://go.shopyourlikes.com/pi/e8eeb2b83bc433c0a5762331f4d80ba113362b9d?afId=628626&afCampaignId=group1&afCreativeId=2993");
+        link.setCreationDate("12:00");
+        link.setOriginalUrl("dddddd");
+        link.setEarnings(10f);
+        link.setUserId(1000);
+        link.setEcpc(90);
+        f.add(link);
+        user.setLinks(f);
+        UserSummary userSummary = new UserSummary("1000");
+        userSummary.setUserId("1000");
+
+        when(userController.getCurrentUser(user)).thenReturn(userSummary);
+        assertEquals(userSummary,userController.getCurrentUser(user));
     }
 
 }
