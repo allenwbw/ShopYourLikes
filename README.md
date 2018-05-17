@@ -12,12 +12,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 You need JDK version 10 and MySQL to run and build this application. 
 
-## Setting up MySQL
+### Setting up MySQL
 1. **Create MySQL database**
     ```bash
     create database TEST
     ```
-2. **Change MySQL username and password as per your MySQL installation (root account)
+2. **Change MySQL username and password as per your MySQL installation (root account)**
 
     + open `src/main/resources/application.properties`
     + change `spring.datasource.username` and `spring.datasource.password` properties as per your mysql installation
@@ -26,6 +26,7 @@ You need JDK version 10 and MySQL to run and build this application.
 ### Running the app
 
     You can run the back-end app by using the following command under the root directory of the app
+
     ```bash
     mvn spring-boot:run
     ```
