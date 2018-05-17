@@ -7,9 +7,9 @@ import static org.mockito.Mockito.*;
 import static org.mockito.BDDMockito.given;
 
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
-import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
-import com.ucla.shopyourlikes.payload.GetMerchantsResponse;
+import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

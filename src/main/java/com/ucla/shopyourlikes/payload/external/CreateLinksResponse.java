@@ -1,5 +1,7 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.external;
 
+
+import com.ucla.shopyourlikes.payload.external.LinkResponse;
 
 import java.util.List;
 

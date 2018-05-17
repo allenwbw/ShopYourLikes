@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.internal;
 
 public class ActiveMerchantResponse {
 

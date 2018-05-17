@@ -6,7 +6,6 @@ import static org.mockito.BDDMockito.given;
 
 import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.User;
-import jdk.internal.dynalink.linker.LinkerServices;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;

@@ -1,9 +1,9 @@
 package com.ucla.shopyourlikes.controller;
 
-import com.ucla.shopyourlikes.payload.CreateLinksRequest;
-import com.ucla.shopyourlikes.payload.CreateLinksResponse;
-import com.ucla.shopyourlikes.payload.LinkResponse;
-import com.ucla.shopyourlikes.payload.PagedResponse;
+import com.ucla.shopyourlikes.payload.external.CreateLinksRequest;
+import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
+import com.ucla.shopyourlikes.payload.external.LinkResponse;
+import com.ucla.shopyourlikes.payload.external.PagedResponse;
 import com.ucla.shopyourlikes.security.CurrentUser;
 import com.ucla.shopyourlikes.service.LinksService;
 import com.ucla.shopyourlikes.util.AppConstants;

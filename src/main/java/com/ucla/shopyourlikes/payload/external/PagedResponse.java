@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.external;
 import java.util.List;
 public class PagedResponse<T> {
     private List<T> content;

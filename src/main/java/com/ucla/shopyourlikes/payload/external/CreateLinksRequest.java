@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.external;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

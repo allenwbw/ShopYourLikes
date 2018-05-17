@@ -2,10 +2,10 @@ package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.Merchant;
-import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
-import com.ucla.shopyourlikes.payload.CreateLinksResponse;
-import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
-import com.ucla.shopyourlikes.payload.LinkResponse;
+import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
+import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+import com.ucla.shopyourlikes.payload.external.LinkResponse;
 
 import java.util.Date;
 

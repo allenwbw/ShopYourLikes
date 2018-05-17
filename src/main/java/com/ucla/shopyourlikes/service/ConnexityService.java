@@ -1,9 +1,9 @@
 package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.ActiveMerchantResponse;
-import com.ucla.shopyourlikes.payload.GenerateLinkResponse;
-import com.ucla.shopyourlikes.payload.GetMerchantsResponse;
+import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
 import com.ucla.shopyourlikes.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.HttpMessageConverter;

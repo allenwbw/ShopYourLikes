@@ -1,4 +1,6 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.internal;
+
+import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
 
 import java.util.List;
 

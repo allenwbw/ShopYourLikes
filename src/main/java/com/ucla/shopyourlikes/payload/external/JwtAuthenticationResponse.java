@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes.payload;
+package com.ucla.shopyourlikes.payload.external;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

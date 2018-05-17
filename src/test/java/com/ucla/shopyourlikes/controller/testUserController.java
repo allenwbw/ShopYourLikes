@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.UserSummary;
+import com.ucla.shopyourlikes.payload.external.UserSummary;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
