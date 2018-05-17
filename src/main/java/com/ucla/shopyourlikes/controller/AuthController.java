@@ -43,11 +43,6 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
-        Integer userId = Integer.parseInt(loginRequest.getUserId());
-        if (!userRepository.existsById(userId)){
-            User user = new User(userId,loginRequest.getApiKey());
-            userRepository.saveAndFlush(user);
-        }
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 
     }
