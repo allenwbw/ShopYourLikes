@@ -13,6 +13,15 @@ public class LinkResponse {
     private String originalUrl;
     private String name;
     private String merchantName;
+    private String link;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public Integer getUserId() {
         return userId;

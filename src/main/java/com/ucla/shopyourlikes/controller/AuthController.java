@@ -1,6 +1,7 @@
 package com.ucla.shopyourlikes.controller;
 
 
+import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.JwtAuthenticationResponse;
 import com.ucla.shopyourlikes.payload.LoginRequest;
 import com.ucla.shopyourlikes.repository.RoleRepository;
@@ -42,6 +43,11 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
+        Integer userId = Integer.parseInt(loginRequest.getUserId());
+        if (!userRepository.existsById(userId)){
+            User user = new User(userId,loginRequest.getApiKey());
+            userRepository.saveAndFlush(user);
+        }
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 
     }

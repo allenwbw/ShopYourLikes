@@ -1,5 +1,6 @@
 package com.ucla.shopyourlikes.model;
 import com.ucla.shopyourlikes.util.Utils;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -34,11 +35,25 @@ public class Link {
     @Column(name = "original_url")
     private String originalUrl;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    @Column(name = "merchant_id")
+    private Integer merchantId;
+
+    @NotNull
+    @Column(name="merchant_name")
+    private String merchantName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "merchant_id", insertable=false, updatable=false)
     private Merchant merchant;
 
     private String name;
+
+    public Link() {
+        this.linkId = new LinkId();
+        this.merchantName = "N/A";
+        this.merchantId = -1;
+    }
 
     public String getUrl() {
         return "http://go.shopyourlikes.com/pi/" + linkId.getHash() + "?afId=" + linkId.getUserId();
@@ -47,10 +62,6 @@ public class Link {
     public void setUrl(String url) {
         String hash = Utils.extractHash(url);
         linkId.setHash(hash);
-    }
-
-    public Link() {
-        linkId = new LinkId();
     }
 
     public LinkId getLinkId() {
@@ -73,7 +84,9 @@ public class Link {
         return linkId.getHash();
     }
 
-    public void setHash(String hash){ linkId.setHash(hash); }
+    public void setHash(String hash){
+        linkId.setHash(hash);
+    }
 
     public String getCreationDate() {
         return creationDate;
@@ -122,19 +135,15 @@ public class Link {
     }
 
     public Integer getMerchantId() {
-        if(merchant == null)
-            return -1;
-        return merchant.getMerchantId();
+        return merchantId;
+    }
+
+    public void setMerchantId(Integer merchantId) {
+        this.merchantId = merchantId;
     }
 
     public String getMerchantName() {
-        if(merchant == null)
-            return "None";
-        return merchant.getMerchantName();
-    }
-
-    public void setMerchant(Merchant merchant) {
-        this.merchant = merchant;
+        return merchantName;
     }
 
     public String getName() {
@@ -144,5 +153,17 @@ public class Link {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 }

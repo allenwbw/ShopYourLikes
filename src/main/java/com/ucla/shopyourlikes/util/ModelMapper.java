@@ -22,6 +22,7 @@ public class ModelMapper {
         linkResponse.setOriginalUrl(link.getOriginalUrl());
         linkResponse.setMerchantName(link.getMerchantName());
         linkResponse.setName(link.getName());
+        linkResponse.setLink(link.getUrl());
         return linkResponse;
     }
 
@@ -39,8 +40,11 @@ public class ModelMapper {
         link.setUrl(generateLinkResponse.getLink());
         link.setUserId(userId);
         link.setRedirects(0);
-        if(merchant != null)
-            link.setMerchant(merchant);
+        if(merchant != null) {
+            link.setMerchantName(merchant.getMerchantName());
+            link.setMerchantId(merchant.getMerchantId());
+        }
+        //link.setMerchant(merchant);
         return link;
     }
 

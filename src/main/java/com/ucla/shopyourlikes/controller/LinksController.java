@@ -33,7 +33,7 @@ public class LinksController {
                                            @Valid @RequestBody CreateLinksRequest request) {
         CreateLinksResponse createLinksResponse = linksService.createLinks(currentUser, request.getUrls());
         if(createLinksResponse != null)
-            return ResponseEntity.ok(linksService.createLinks(currentUser, request.getUrls()));
+            return ResponseEntity.ok(createLinksResponse);
         return  ResponseEntity.badRequest().build();
     }
 }

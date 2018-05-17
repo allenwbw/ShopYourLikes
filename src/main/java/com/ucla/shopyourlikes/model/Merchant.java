@@ -24,8 +24,9 @@ public class Merchant{
     private String merchantName;
 
     @Embedded
-    @NotNull
     private MerchantHost merchantHost;
+
+    public Merchant(){this.merchantHost = new MerchantHost();}
 
     public Integer getMerchantId() {
         return merchantId;

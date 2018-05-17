@@ -37,8 +37,11 @@ public class MerchantService {
     @PostConstruct
     private void init()
     {
+        Merchant nullMerchant = new Merchant();
+        nullMerchant.setMerchantId(-1);
+        nullMerchant.setMerchantName("N/A");
+        merchantRepository.save(nullMerchant);
         List<ActiveMerchantResponse> merchants = connexityService.getMerchants("US");
-
         for(ActiveMerchantResponse m : merchants)
         {
             Merchant merchant = ModelMapper.mapActiveMerchantResponse(m);

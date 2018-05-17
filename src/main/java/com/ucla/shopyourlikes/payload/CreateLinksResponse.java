@@ -7,6 +7,7 @@ public class CreateLinksResponse {
     private List<LinkResponse> generatedLinks;
 
     public CreateLinksResponse(){}
+
     public CreateLinksResponse(List<LinkResponse> generatedLinks){
         this.generatedLinks = generatedLinks;
     }
