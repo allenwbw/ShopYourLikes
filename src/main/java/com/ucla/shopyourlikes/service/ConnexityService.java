@@ -6,6 +6,7 @@ import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
 import com.ucla.shopyourlikes.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -49,11 +50,7 @@ public class ConnexityService {
         for (String url : urls){
             GenerateLinkResponse response = new GenerateLinkResponse();
             String reqUrl;
-            try {
-                reqUrl = baseUrl + Utils.encodeUrl(url) + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
-            } catch (UnsupportedEncodingException e) {
-                continue;
-            }
+            reqUrl = baseUrl + url + "&publisherId=" + publisherid + "&apiKey=" + apiKey;
             try {
                 response = restTemplate.getForObject(reqUrl, GenerateLinkResponse.class);
             } catch (HttpClientErrorException ce) {
