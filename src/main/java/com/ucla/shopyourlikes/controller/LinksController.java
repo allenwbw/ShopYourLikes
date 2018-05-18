@@ -1,9 +1,6 @@
 package com.ucla.shopyourlikes.controller;
 
-import com.ucla.shopyourlikes.payload.external.CreateLinksRequest;
-import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
-import com.ucla.shopyourlikes.payload.external.LinkResponse;
-import com.ucla.shopyourlikes.payload.external.PagedResponse;
+import com.ucla.shopyourlikes.payload.external.*;
 import com.ucla.shopyourlikes.security.CurrentUser;
 import com.ucla.shopyourlikes.service.LinksService;
 import com.ucla.shopyourlikes.util.AppConstants;
@@ -26,6 +23,12 @@ public class LinksController {
                                                 @RequestParam(value="page",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                 @RequestParam(value="size",defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
         return linksService.getAllLinks(currentUser, page, size);
+    }
+
+    @GetMapping("/ecpc")
+    public EcpcResponse getEcpc(@CurrentUser Object currentUser,
+                                @RequestParam(value="url") String url) {
+        return linksService.getEcpc(currentUser, url);
     }
 
     @PostMapping("/create")

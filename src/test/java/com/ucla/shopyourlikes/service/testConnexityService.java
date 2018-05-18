@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.BDDMockito.given;
 
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
 import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
 import org.junit.Before;
@@ -78,18 +78,18 @@ public class testConnexityService {
     }
     @Test
     public void testGetMerchants() throws UnsupportedEncodingException {
-        ActiveMerchantResponse activeMerchantResponse = new ActiveMerchantResponse();
-        activeMerchantResponse.setMerchantId(1000);
-        activeMerchantResponse.setMerchantName("paypal");
-        activeMerchantResponse.setMerchantUrl("www.paypal.com");
-        List<ActiveMerchantResponse> activeMerchantResponseList =  new ArrayList<>();
-        activeMerchantResponseList.add(activeMerchantResponse);
+        MerchantResponseItem merchantResponseItem = new MerchantResponseItem();
+        merchantResponseItem.setMerchantId(1000);
+        merchantResponseItem.setMerchantName("paypal");
+        merchantResponseItem.setMerchantUrl("www.paypal.com");
+        List<MerchantResponseItem> merchantResponseItemList =  new ArrayList<>();
+        merchantResponseItemList.add(merchantResponseItem);
 
         GetMerchantsResponse getMerchantsResponse = new GetMerchantsResponse();
         getMerchantsResponse.getActiveMerchantsResponse();
 
-        when(connexityService.getMerchants("1000")).thenReturn(activeMerchantResponseList);
-        assertEquals(activeMerchantResponseList,connexityService.getMerchants("1000"));
+        when(connexityService.getMerchants("1000")).thenReturn(merchantResponseItemList);
+        assertEquals(merchantResponseItemList,connexityService.getMerchants("1000"));
     }
 
     @Test(expected = HttpClientErrorException.class)

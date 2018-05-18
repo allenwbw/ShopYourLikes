@@ -2,10 +2,13 @@ package com.ucla.shopyourlikes.util;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.Merchant;
-import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.external.EcpcResponse;
+import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
 import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
+import com.ucla.shopyourlikes.payload.internal.EcpcResponseItem;
 import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.external.LinkResponse;
+import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
 
 import java.util.Date;
 
@@ -48,11 +51,19 @@ public class ModelMapper {
         return link;
     }
 
-    public static Merchant mapActiveMerchantResponse(ActiveMerchantResponse response) {
+    public static Merchant mapActiveMerchantResponse(MerchantResponseItem response) {
         Merchant merchant = new Merchant();
         merchant.setMerchantId(response.getMerchantId());
         merchant.setMerchantName(response.getMerchantName());
         merchant.setMerchantHost(Utils.extractHost(response.getMerchantUrl()));
         return merchant;
+    }
+
+    public static EcpcResponse mapEcpcResponse(GetEcpcResponse response) {
+        EcpcResponse ecpcResponse = new EcpcResponse();
+        EcpcResponseItem item = response.getEcpcList().get(0);
+        ecpcResponse.setUrl(item.getOriginalUrl());
+        ecpcResponse.setEcpc(item.getEcpc());
+        return ecpcResponse;
     }
 }

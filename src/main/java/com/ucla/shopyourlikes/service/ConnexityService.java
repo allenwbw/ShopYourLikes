@@ -1,12 +1,11 @@
 package com.ucla.shopyourlikes.service;
 
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
+import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
+import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
 import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
 import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
-import com.ucla.shopyourlikes.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,9 +60,8 @@ public class ConnexityService {
         return sylLinks;
     }
 
-    public List<ActiveMerchantResponse> getMerchants(String countryCode)
-    {
-        List<ActiveMerchantResponse> merchants = new ArrayList<>();
+    public List<MerchantResponseItem> getMerchants(String countryCode) {
+        List<MerchantResponseItem> merchants = new ArrayList<>();
 
         String baseUrl = "http://api.shopyourlikes.com/api/activeMerchants";
 
@@ -83,5 +80,23 @@ public class ConnexityService {
         }
 
         return response.getActiveMerchantsResponse();
+    }
+
+    public GetEcpcResponse getEcpc(User user, String url) {
+        String baseUrl = "http://api.shopyourlikes.com/api/link/ecpc?url=";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        GetEcpcResponse response = new GetEcpcResponse();
+
+        String reqUrl = baseUrl + url + "&publisherId=" + user.getUserId() + "&apiKey=" + user.getApiKey();
+
+        try {
+            response = restTemplate.getForObject(reqUrl, GetEcpcResponse.class);
+        } catch (HttpClientErrorException e) {
+            logger.error("Fail to contact SYL server", e);
+        }
+
+        return response;
     }
 }

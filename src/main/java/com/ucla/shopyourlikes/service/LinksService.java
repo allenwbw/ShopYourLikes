@@ -5,16 +5,16 @@ import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.Merchant;
 import com.ucla.shopyourlikes.model.MerchantHost;
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
-import com.ucla.shopyourlikes.payload.external.LinkResponse;
-import com.ucla.shopyourlikes.payload.external.PagedResponse;
+import com.ucla.shopyourlikes.payload.external.*;
 import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
 import com.ucla.shopyourlikes.repository.LinkRepository;
 import com.ucla.shopyourlikes.repository.MerchantRepository;
 import com.ucla.shopyourlikes.repository.UserRepository;
 import com.ucla.shopyourlikes.util.AppConstants;
 import com.ucla.shopyourlikes.util.ModelMapper;
 import com.ucla.shopyourlikes.util.Utils;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +101,19 @@ public class LinksService {
         CreateLinksResponse createLinksResponse = new CreateLinksResponse(sylRes);
         return createLinksResponse;
 
+    }
+
+    public EcpcResponse getEcpc(Object currentUser, String url)
+    {
+        User user = userRepository.findByUserId(Integer.parseInt(currentUser.toString()));
+
+        if(user == null)
+            return null;
+
+        System.out.println(url);
+
+        GetEcpcResponse getEcpcResponse = connexityService.getEcpc(user, url);
+
+        return ModelMapper.mapEcpcResponse(getEcpcResponse);
     }
 }

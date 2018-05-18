@@ -1,6 +1,6 @@
 package com.ucla.shopyourlikes.payload.internal;
 
-public class ActiveMerchantResponse {
+public class MerchantResponseItem {
 
     private Integer merchantId;
     private String merchantName;

@@ -1,14 +1,12 @@
 package com.ucla.shopyourlikes.payload.internal;
 
-import com.ucla.shopyourlikes.payload.internal.ActiveMerchantResponse;
-
 import java.util.List;
 
 public class GetMerchantsResponse {
 
-    private List<ActiveMerchantResponse> activeMerchantsResponse;
+    private List<MerchantResponseItem> activeMerchantsResponse;
 
-    public List<ActiveMerchantResponse> getActiveMerchantsResponse() {
+    public List<MerchantResponseItem> getActiveMerchantsResponse() {
         return activeMerchantsResponse;
     }
 
