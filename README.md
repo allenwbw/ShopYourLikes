@@ -35,25 +35,62 @@ You can run the back-end app by using the following command under the root direc
 The server will start on port 5000.
     
     
-## Running the tests
+## Running Units Tests
 
+The purpose of the unit test is a level of software testing where individual units/components of a software 
+are tested.<br/>
+#####Mockito Test Framwork <br/>
+We use Mocktio framework pattern to write units test for our service application. It allows us
+to create mock object when we have multiple object dependency inside one method. This really allows
+us to focus testing the behavior of our service application. <br/>
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+To understand more about Behavior-driven development:
+* [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) - Behavior-driven development
+* [Mockito](http://static.javadoc.io/org.mockito/mockito-core/2.18.3/org/mockito/BDDMockito.html)
 
 ```
-Give an example
-```
+    // creating a mock object of ConnexityService
+    @Mock
+    private ConnexityService connexityService;
 
+    
+    // initialize the mock envrionment
+    @Before
+    public void setupMock() {
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    // test the mock object creation
+    @Test
+    public void testMockCreation() {
+        assertNotNull(connexityService);
+    }
+
+    @Test
+    public void testCreateLinks() {
+    // creating raw data 
+        User user = new User();
+        user.setUserId(1000);
+        user.setApiKey("10000");
+        List<String> testUrls =  new ArrayList<>();
+        testUrls.add("www.macys.com");
+        List<GenerateLinkResponse> linkResponses =  new ArrayList<>();
+        GenerateLinkResponse generateLinkResponse = new GenerateLinkResponse();
+        generateLinkResponse.setEcpc(2);
+        generateLinkResponse.setLink("www.targets.com");
+        generateLinkResponse.setMatchType("food");
+        generateLinkResponse.setMerchantName("targets");
+        generateLinkResponse.setPublisherId("1000");
+        generateLinkResponse.setOriginalUrl("www.target.com");
+        linkResponses.add(generateLinkResponse);
+    
+    // manipulating the return object 
+        when(connexityService.createLinks(user, testUrls)).thenReturn(linkResponses);
+    
+    // assert the expected result with our actual result  
+        assertEquals(linkResponses,connexityService.createLinks(user,testUrls));
+    ...............................
+```
 ## Deployment
 
 Build the app with the following command
@@ -77,6 +114,7 @@ The jar file will be deployable to any machine with JDK 10 installed.
 * **Bowei Wang** 
 * **Alex Gold** 
 * **Qinhao Xu** 
+* **Robert Posada** 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
