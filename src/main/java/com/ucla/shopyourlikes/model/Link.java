@@ -16,8 +16,12 @@ public class Link {
     private LinkId linkId;
 
     @NotNull
-    @Column(columnDefinition = "DATETIME", name = "creation_date")
-    private String creationDate;
+    @Column(name = "creation_date")
+    private Integer creationDate;
+
+    @NotNull
+    @Column(name = "last_updated")
+    private Integer lastUpdated;
 
     @NotNull
     private Integer redirects;
@@ -88,11 +92,11 @@ public class Link {
         linkId.setHash(hash);
     }
 
-    public String getCreationDate() {
+    public Integer getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Integer creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -112,7 +116,9 @@ public class Link {
         this.earnings = earnings;
     }
 
-    public Integer getEcpc() { return ecpc; }
+    public Integer getEcpc() {
+        return ecpc;
+    }
 
     public void setEcpc(Integer ecpc) {
         this.ecpc = ecpc;
@@ -165,5 +171,13 @@ public class Link {
 
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
+    }
+
+    public Integer getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Integer lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

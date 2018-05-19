@@ -19,10 +19,9 @@ public class LinksController {
     private LinksService linksService;
 
     @GetMapping("/mylinks")
-    public PagedResponse<LinkResponse> getLinks(@CurrentUser Object currentUser,
-                                                @RequestParam(value="page",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-                                                @RequestParam(value="size",defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return linksService.getAllLinks(currentUser, page, size);
+    public LinkUpdate getLinks(@CurrentUser Object currentUser,
+                               @RequestParam(value="timestamp",defaultValue = "0") Integer timestamp) {
+        return linksService.getLinkUpdate(currentUser, timestamp);
     }
 
     @GetMapping("/ecpc")

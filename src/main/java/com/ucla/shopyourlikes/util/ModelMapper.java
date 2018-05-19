@@ -36,7 +36,9 @@ public class ModelMapper {
 
     public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId, Merchant merchant) {
         Link link = new Link();
-        link.setCreationDate(Utils.sqlDateString(new Date()));
+        Integer timestamp = Utils.unixTime();
+        link.setCreationDate(timestamp);
+        link.setLastUpdated(timestamp);
         link.setEcpc(generateLinkResponse.getEcpc());
         link.setEarnings(0.0f);
         link.setOriginalUrl(generateLinkResponse.getOriginalUrl());

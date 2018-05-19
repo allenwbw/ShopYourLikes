@@ -24,6 +24,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import  org.springframework.data.domain.Pageable;
 
+import javax.jws.WebParam;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,24 +54,22 @@ public class LinksService {
         }
     }
 
-    public PagedResponse<LinkResponse> getAllLinks(Object currentUser, int page, int size){
-        validatePageNumberAndSize(page, size);
-        User user = userRepository.findByUserId(Integer.parseInt(currentUser.toString()));
+    public LinkUpdate getLinkUpdate(Object currentUser, Integer timestamp)
+    {
+        Integer userId = Integer.valueOf(currentUser.toString());
+        List<Link> links = linkRepository.findByLinkId_UserIdAndLastUpdatedAfter(userId, timestamp);
 
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "creationDate");
-        Page<Link> links = linkRepository.findByLinkIdUserId(user.getUserId(), pageable);
-        if (links.getNumberOfElements() == 0){
-            return new PagedResponse<>(Collections.emptyList(), links.getNumber(),
-                    links.getSize(), links.getTotalElements(), links.getTotalPages(), links.isLast());
+        List<LinkResponse> linkResponse = new ArrayList<LinkResponse>();
+
+        for(Link l : links) {
+            linkResponse.add(ModelMapper.mapLinkToLinkResponse(l));
         }
 
-        List<LinkResponse> linkResponses = links.map(link -> {
-            return ModelMapper.mapLinkToLinkResponse(link);
-        }).getContent();
+        LinkUpdate linkUpdate = new LinkUpdate();
+        linkUpdate.setTimestamp(Utils.unixTime());
+        linkUpdate.setLinks(linkResponse);
 
-        return new PagedResponse<>(linkResponses, links.getNumber(),
-                links.getSize(), links.getTotalElements(), links.getTotalPages(), links.isLast());
-
+        return linkUpdate;
     }
 
     public CreateLinksResponse createLinks(Object currentUser, List<String> urls) {

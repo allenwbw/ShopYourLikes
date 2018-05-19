@@ -1,11 +1,9 @@
 package com.ucla.shopyourlikes.payload.external;
 
-import java.time.Instant;
-
 public class LinkResponse {
     private Integer userId;
     private String hash;
-    private String creationDate;
+    private Integer creationDate;
     private Integer redirects;
     private Float earnings;
     private Integer ecpc;
@@ -39,11 +37,11 @@ public class LinkResponse {
         this.hash = hash;
     }
 
-    public String getCreationDate() {
+    public Integer getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Integer creationDate) {
         this.creationDate = creationDate;
     }
 

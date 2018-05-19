@@ -18,6 +18,10 @@ public class Utils {
         return dateFormat.format(date);
     }
 
+    public static Integer unixTime() {
+        return (int)(System.currentTimeMillis() / 1000L);
+    }
+
     public static String extractHash(String url) {
         if(url.isEmpty()) return "";
         return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
