@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
-// This is basic function to insert a raw data to our database
 @RestController
 @RequestMapping("/api/links")
 public class LinksController {
     @Autowired
-    private LinksService linksService;
+    protected LinksService linksService;
 
     @GetMapping("/mylinks")
     public PagedResponse<LinkResponse> getLinks(@CurrentUser Object currentUser,
