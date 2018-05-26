@@ -31,7 +31,7 @@ public class testLinksController {
 
     @Test
     public void testMockCreation() {
-        assertNotNull(linksController);
+        assertNotNull(linksService);
     }
 
     @Test

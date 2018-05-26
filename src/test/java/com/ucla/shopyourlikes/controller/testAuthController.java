@@ -1,6 +1,7 @@
 package com.ucla.shopyourlikes.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import com.ucla.shopyourlikes.payload.external.LoginRequest;
 import com.ucla.shopyourlikes.repository.RoleRepository;
@@ -41,7 +42,14 @@ public class testAuthController {
         authController.userRepository = userRepository;
         authController.roleRepository = roleRepository;
         authController.tokenProvider = tokenProvider;
+    }
 
+    @Test
+    public void testMockCreation() {
+        assertNotNull(authenticationManager);
+        assertNotNull(userRepository);
+        assertNotNull(roleRepository);
+        assertNotNull(tokenProvider);
     }
 
     @Test

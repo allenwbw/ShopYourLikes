@@ -6,10 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 import static org.mockito.BDDMockito.given;
 
+import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
-import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
-import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
+import com.ucla.shopyourlikes.payload.internal.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,82 +23,85 @@ import java.util.List;
 // TODO: will add more testcase
 public class testConnexityService {
 
-    @Mock
     private ConnexityService connexityService;
 
     @Before
     public void setupMock() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void testMockCreation() {
-        assertNotNull(connexityService);
+        connexityService = new ConnexityService();
     }
 
     @Test
     public void testCreateLinks() {
         User user = new User();
-        user.setUserId(1000);
-        user.setApiKey("10000");
+        user.setUserId(628626);
+        user.setApiKey("7438a399d83eceffef422e5563a94401");
         List<String> testUrls =  new ArrayList<>();
         testUrls.add("www.macys.com");
-        List<GenerateLinkResponse> linkResponses =  new ArrayList<>();
-        GenerateLinkResponse generateLinkResponse = new GenerateLinkResponse();
-        generateLinkResponse.setEcpc(2);
-        generateLinkResponse.setLink("www.targets.com");
-        generateLinkResponse.setMatchType("food");
-        generateLinkResponse.setMerchantName("targets");
-        generateLinkResponse.setPublisherId("1000");
-        generateLinkResponse.setOriginalUrl("www.target.com");
-        linkResponses.add(generateLinkResponse);
+        List<GenerateLinkResponse> createLinks =  connexityService.createLinks(user,testUrls);
+        int ecpc =  createLinks.get(0).getEcpc();
+        String url =  createLinks.get(0).getOriginalUrl();
+        String type =  createLinks.get(0).getMatchType();
+        String userId = createLinks.get(0).getPublisherId();
+        String syl_url =  createLinks.get(0).getLink();
 
-        when(connexityService.createLinks(user, testUrls)).thenReturn(linkResponses);
-        assertEquals(linkResponses,connexityService.createLinks(user,testUrls));
+        assertNotNull(createLinks);
+        assertEquals("http://www.macys.com",url);
+        assertEquals(5,ecpc);
+        assertEquals("628626",userId);
+        assertEquals("PAGE_CPC",type);
+        assertEquals("http://go.shopyourlikes.com/pi/e8eeb2b83bc433c0a5762331f4d80ba113362b9d?afId=628626&afCreativeId=2993",syl_url);
     }
 
     @Test
-    public void testCreateLinksThrowUnsupportedEncodingException() {
+    public void testCreateLinksThrowHttpClientErrorException() throws HttpClientErrorException {
         User user = new User();
-        user.setUserId(1000);
-        user.setApiKey("10000");
+        user.setUserId(anyInt());
+        user.setApiKey(anyString());
         List<String> testUrls =  new ArrayList<>();
-        testUrls.add("d//////d///dff||Ddksklddddldldldlsdls");
-        given(connexityService.createLinks(user,testUrls)).willAnswer( invocation -> { throw new UnsupportedEncodingException(); });
-    }
-
-    @Test(expected = HttpClientErrorException.class)
-    public void testCreateLinksThrowHttpClientErrorException() {
-        String reqUrl = "http://api.shopyourlikes.com/api/link/generate?url=http%3A%2F%2Fwww.shopzilla.com&publisherId=6dd626&apiKey=743dd99d83eceffef422e5563a94401&afCampaignId=group1";
-        GenerateLinkResponse response = new GenerateLinkResponse();
-        RestTemplate restTemplate = new RestTemplate();
-        response = restTemplate.getForObject(reqUrl, GenerateLinkResponse.class);
-
+        testUrls.add("www.macys.com");
+        connexityService.createLinks(user,testUrls);
     }
     @Test
-    public void testGetMerchants() throws UnsupportedEncodingException {
-        MerchantResponseItem merchantResponseItem = new MerchantResponseItem();
-        merchantResponseItem.setMerchantId(1000);
-        merchantResponseItem.setMerchantName("paypal");
-        merchantResponseItem.setMerchantUrl("www.paypal.com");
-        List<MerchantResponseItem> merchantResponseItemList =  new ArrayList<>();
-        merchantResponseItemList.add(merchantResponseItem);
-
-        GetMerchantsResponse getMerchantsResponse = new GetMerchantsResponse();
-        getMerchantsResponse.getActiveMerchantsResponse();
-
-        when(connexityService.getMerchants("1000")).thenReturn(merchantResponseItemList);
-        assertEquals(merchantResponseItemList,connexityService.getMerchants("1000"));
-    }
-
-    @Test(expected = HttpClientErrorException.class)
-    public void testGetMerchantsThrowHttpClientErrorException() {
-        String reqUrl = "http://api.shopyourlikes.com/api/activeMerchants?publisherId=636dd&apiKey=7438ffff9d83eceffef422e5563a94401&countryCode=LSLS";
+    public void testGetMerchants() {
+        String reqUrl = "http://api.shopyourlikes.com/api/activeMerchants?publisherId=628626&apiKey=7438a399d83eceffef422e5563a94401&countryCode=US";
         GenerateLinkResponse response = new GenerateLinkResponse();
         RestTemplate restTemplate = new RestTemplate();
         response = restTemplate.getForObject(reqUrl, GenerateLinkResponse.class);
-
+        assertNotNull(response);
     }
 
+    @Test
+    public void testGetMerchantsThrowHttpClientErrorException() throws HttpClientErrorException {
+        connexityService.getMerchants(anyString());
+    }
+
+    @Test
+    public void testGetMerchantsBadRequestException() {
+        List<MerchantResponseItem> merchantResponseItems = connexityService.getMerchants(null);
+        assertEquals(new ArrayList<>(), merchantResponseItems);
+    }
+
+    @Test
+    public void testGetEcpc() {
+        User user = new User();
+        user.setUserId(628626);
+        user.setApiKey("7438a399d83eceffef422e5563a94401");
+        String url =  "www.macys.com";
+        GetEcpcResponse getEcpc = connexityService.getEcpc(user,url);
+        List<EcpcResponseItem> ecpcResponseItems = getEcpc.getEcpcList();
+        int result = ecpcResponseItems.get(0).getEcpc();
+        assertNotNull(getEcpc);
+        assertEquals(5,result);
+        assertEquals("http://www.macys.com",ecpcResponseItems.get(0).getOriginalUrl());
+    }
+
+    @Test
+    public void testGetEcpcThrowHttpClientErrorException() throws HttpClientErrorException {
+        User user = new User();
+        user.setUserId(anyInt());
+        user.setApiKey(anyString());
+        connexityService.getEcpc(user,anyString());
+    }
 
 }

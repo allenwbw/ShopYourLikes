@@ -1,5 +1,7 @@
 package com.ucla.shopyourlikes.service;
 
+import com.google.common.base.Strings;
+import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.User;
 import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
 import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
@@ -61,6 +63,11 @@ public class ConnexityService {
     }
 
     public List<MerchantResponseItem> getMerchants(String countryCode) {
+
+        if(Strings.isNullOrEmpty(countryCode)) {
+            return new ArrayList<>();
+        }
+
         List<MerchantResponseItem> merchants = new ArrayList<>();
 
         String baseUrl = "http://api.shopyourlikes.com/api/activeMerchants";
