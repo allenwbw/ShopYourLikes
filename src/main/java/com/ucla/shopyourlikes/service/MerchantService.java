@@ -13,10 +13,10 @@ import java.util.List;
 @Service
 public class MerchantService {
     @Autowired
-    private MerchantRepository merchantRepository;
+    protected MerchantRepository merchantRepository;
 
     @Autowired
-    private ConnexityService connexityService;
+    protected ConnexityService connexityService;
 
     @PostConstruct
     private void init()
@@ -36,6 +36,7 @@ public class MerchantService {
 
     public Merchant getMerchantById(Integer merchantId)
     {
+        if (merchantId == null) return null;
         return merchantRepository.getByMerchantId(merchantId);
     }
 }

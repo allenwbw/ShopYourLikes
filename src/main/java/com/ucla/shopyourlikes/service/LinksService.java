@@ -31,16 +31,16 @@ import java.util.List;
 @Service
 public class LinksService {
     @Autowired
-    private LinkRepository linkRepository;
+    protected LinkRepository linkRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
 
     @Autowired
-    private MerchantRepository merchantRepository;
+    protected MerchantRepository merchantRepository;
 
     @Autowired
-    private ConnexityService connexityService;
+    protected ConnexityService connexityService;
 
     private static final Logger logger = LoggerFactory.getLogger(LinksService.class);
     private void validatePageNumberAndSize(int page, int size) {
