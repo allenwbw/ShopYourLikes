@@ -26,19 +26,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
 
     @Autowired
-    private ConnexityService connexityService;
+    protected ConnexityService connexityService;
 
-    private boolean authenticateLocal(Authentication authentication) {
+    protected boolean authenticateLocal(Authentication authentication) {
         Integer publisherId = Integer.valueOf(authentication.getPrincipal().toString());
         String apiKey = authentication.getCredentials().toString();
 
         return userRepository.existsByUserIdAndAndApiKey(publisherId, apiKey);
     }
 
-    private boolean authenticateConnexity(Authentication authentication) {
+    protected boolean authenticateConnexity(Authentication authentication) {
         String publisherid = authentication.getPrincipal().toString();
         String apikey = authentication.getCredentials().toString();
 
@@ -55,13 +55,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return response.getStatusCode().value() == 200;
     }
 
-    private void registerUser(Authentication authentication) {
+    protected void registerUser(Authentication authentication) {
         Integer userId = Integer.valueOf(authentication.getPrincipal().toString());
         User user = new User(userId, authentication.getCredentials().toString());
         userRepository.saveAndFlush(user);
     }
 
-    private Authentication accept(Authentication authentication) {
+    protected Authentication accept(Authentication authentication) {
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
         grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new UsernamePasswordAuthenticationToken(authentication.getPrincipal().toString(), authentication.getCredentials(), grantedAuths);
