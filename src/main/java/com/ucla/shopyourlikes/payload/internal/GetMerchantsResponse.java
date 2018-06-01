@@ -10,4 +10,7 @@ public class GetMerchantsResponse {
         return activeMerchantsResponse;
     }
 
+    public void setActiveMerchantsResponse(List<MerchantResponseItem> activeMerchantsResponse) {
+        this.activeMerchantsResponse = activeMerchantsResponse;
+    }
 }
