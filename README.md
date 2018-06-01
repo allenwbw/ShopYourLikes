@@ -49,47 +49,50 @@ To understand more about Behavior-driven development:
 * [Mockito](http://static.javadoc.io/org.mockito/mockito-core/2.18.3/org/mockito/BDDMockito.html)
 
 ```
-    // creating a mock object of ConnexityService
-    @Mock
-    private ConnexityService connexityService;
-
+       @Mock
+       private MerchantRepository merchantRepository;
+   
+       @Mock
+       private  ConnexityService connexityService;
+   
+       private MerchantService merchantService;
+   
+       @Before
+       public void setupMock() {
+           MockitoAnnotations.initMocks(this);
+           merchantService = new MerchantService();
+           merchantService.connexityService = connexityService;
+           merchantService.merchantRepository = merchantRepository;
+       }
+   
+       @Test
+       public void testMockCreation() {
+           assertNotNull(connexityService);
+           assertNotNull(merchantRepository);
+       }
     
-    // initialize the mock envrionment
-    @Before
-    public void setupMock() {
-        MockitoAnnotations.initMocks(this);
-    }
-    
-    // test the mock object creation
-    @Test
-    public void testMockCreation() {
-        assertNotNull(connexityService);
-    }
-
-    @Test
-    public void testCreateLinks() {
-    // creating raw data 
-        User user = new User();
-        user.setUserId(1000);
-        user.setApiKey("10000");
-        List<String> testUrls =  new ArrayList<>();
-        testUrls.add("www.macys.com");
-        List<GenerateLinkResponse> linkResponses =  new ArrayList<>();
-        GenerateLinkResponse generateLinkResponse = new GenerateLinkResponse();
-        generateLinkResponse.setEcpc(2);
-        generateLinkResponse.setLink("www.targets.com");
-        generateLinkResponse.setMatchType("food");
-        generateLinkResponse.setMerchantName("targets");
-        generateLinkResponse.setPublisherId("1000");
-        generateLinkResponse.setOriginalUrl("www.target.com");
-        linkResponses.add(generateLinkResponse);
-    
-    // manipulating the return object 
-        when(connexityService.createLinks(user, testUrls)).thenReturn(linkResponses);
-    
-    // assert the expected result with our actual result  
-        assertEquals(linkResponses,connexityService.createLinks(user,testUrls));
-    ...............................
+      @Test
+      public void testGetMerchantById_goodcase() {
+          //set up
+          Merchant fake =  new Merchant();
+          MerchantHost merchantHost = new MerchantHost();
+          merchantHost.setMerchantDomain("www");
+          merchantHost.setMerchantTld("cs130");
+          fake.setMerchantId(222);
+          fake.setMerchantName("ucla");
+          fake.setMerchantHost(merchantHost);
+  
+          // return the desired object
+          when(merchantService.getMerchantById(anyInt())).thenReturn(fake);
+          Merchant merchant =  merchantService.getMerchantById(anyInt());
+  
+          // assert the expected and actual results
+          Integer i =  new Integer(222);
+          assertEquals(i,merchant.getMerchantId());
+          assertEquals("ucla",merchant.getMerchantName());
+          assertEquals(merchantHost.getMerchantDomain(),merchant.getMerchantHost().getMerchantDomain());
+          assertEquals(merchantHost.getMerchantTld(),merchant.getMerchantHost().getMerchantTld());
+      }
 ```
 ## Deployment
 
