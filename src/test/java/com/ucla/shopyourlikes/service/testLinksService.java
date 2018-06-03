@@ -75,11 +75,4 @@ public class testLinksService {
         linksService.getAllLinks(user,1, AppConstants.MAX_PAGE_SIZE+1);
     }
 
-
-
-
-
-
-
-
 }
