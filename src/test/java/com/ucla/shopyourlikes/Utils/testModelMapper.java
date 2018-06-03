@@ -1,4 +1,4 @@
-package com.ucla.shopyourlikes.testUtils;
+package com.ucla.shopyourlikes.Utils;
 
 import com.ucla.shopyourlikes.model.Link;
 import com.ucla.shopyourlikes.model.LinkId;
