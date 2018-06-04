@@ -56,8 +56,8 @@ public class testConnexityService {
     @Test
     public void testCreateLinksThrowHttpClientErrorException() throws HttpClientErrorException {
         User user = new User();
-        user.setUserId(anyInt());
-        user.setApiKey(anyString());
+        user.setUserId(1626);
+        user.setApiKey("07438a383eceffef422e5563a94401");
         List<String> testUrls =  new ArrayList<>();
         testUrls.add("www.macys.com");
         connexityService.createLinks(user,testUrls);
@@ -73,7 +73,7 @@ public class testConnexityService {
 
     @Test
     public void testGetMerchantsThrowHttpClientErrorException() throws HttpClientErrorException {
-        connexityService.getMerchants(anyString());
+        connexityService.getMerchants("US");
     }
 
     @Test
@@ -99,9 +99,9 @@ public class testConnexityService {
     @Test
     public void testGetEcpcThrowHttpClientErrorException() throws HttpClientErrorException {
         User user = new User();
-        user.setUserId(anyInt());
-        user.setApiKey(anyString());
-        connexityService.getEcpc(user,anyString());
+        user.setUserId(1626);
+        user.setApiKey("07438a383eceffef422e5563a94401");
+        connexityService.getEcpc(user,"www.google.com");
     }
 
 }

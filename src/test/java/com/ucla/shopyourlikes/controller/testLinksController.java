@@ -47,11 +47,6 @@ public class testLinksController {
     }
 
     @Test
-    public void testGenerateLinks_ok() {
-      when(linksController.linksService.createLinks(any(),anyList())).thenReturn(any());
-    }
-
-    @Test
     public void testGenerateLinks_BAD_REQUEST() {
         User user = new User();
         user.setInstagramName("cs130");
