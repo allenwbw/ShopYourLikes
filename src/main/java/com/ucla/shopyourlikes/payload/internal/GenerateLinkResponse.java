@@ -1,5 +1,8 @@
 package com.ucla.shopyourlikes.payload.internal;
 
+/**
+ * This class contains all information about the GenerateLinkResponse object,including all the getters and setters.
+ */
 public class GenerateLinkResponse {
     private String originalUrl;
     private String matchType;

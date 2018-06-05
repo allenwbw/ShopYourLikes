@@ -21,6 +21,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * This class has the authentication implementation
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);

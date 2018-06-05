@@ -7,7 +7,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-
+/**
+ * This class contains all information about link object, including all the getters and setters.
+ */
 @Entity
 @Table(name = "links")
 public class Link {
@@ -49,16 +51,28 @@ public class Link {
 
     private String name;
 
+    /**
+     * default constructor with setting merchantName to "N/A" and merchantId to -1
+     */
     public Link() {
         this.linkId = new LinkId();
         this.merchantName = "N/A";
         this.merchantId = -1;
     }
 
+    /**
+     *
+     * @return url with SYL link format
+     */
     public String getUrl() {
         return "http://go.shopyourlikes.com/pi/" + linkId.getHash() + "?afId=" + linkId.getUserId();
     }
 
+    /**
+     *
+     * @param url
+     * Extracting hash from the SYL url
+     */
     public void setUrl(String url) {
         String hash = Utils.extractHash(url);
         linkId.setHash(hash);

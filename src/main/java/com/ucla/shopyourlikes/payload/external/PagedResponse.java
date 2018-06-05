@@ -1,5 +1,10 @@
 package com.ucla.shopyourlikes.payload.external;
 import java.util.List;
+
+/**
+ *  This class contains the custom PagedResponse list with unknown object information,including all the getters and setters.
+ * @param <T>
+ */
 public class PagedResponse<T> {
     private List<T> content;
     private int page;
@@ -8,10 +13,22 @@ public class PagedResponse<T> {
     protected int totalPages;
     private boolean last;
 
+    /**
+     * default constructor with no params
+     */
     public PagedResponse(){
 
     }
 
+    /**
+     * constructor with params
+     * @param content
+     * @param page
+     * @param size
+     * @param totalElements
+     * @param totalPages
+     * @param last
+     */
     public PagedResponse(List<T> content, int page, int size, long totalElements, int totalPages, boolean last){
         this.content = content;
         this.page = page;

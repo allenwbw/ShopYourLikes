@@ -1,5 +1,8 @@
 package com.ucla.shopyourlikes.payload.external;
 
+/**
+ * This class contains all information about the ApiResponse object,including all the getters and setters.
+ */
 public class ApiResponse {
     private Boolean success;
     private String message;

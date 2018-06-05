@@ -1,12 +1,11 @@
 package com.ucla.shopyourlikes.service;
 
 import com.google.common.base.Strings;
-import com.ucla.shopyourlikes.exception.BadRequestException;
 import com.ucla.shopyourlikes.model.User;
-import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
-import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
 import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
 import com.ucla.shopyourlikes.payload.internal.GetMerchantsResponse;
+import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -19,6 +18,9 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class includes all the service methods call to the Connexity.
+ */
 @Service
 public class ConnexityService {
 
@@ -30,6 +32,13 @@ public class ConnexityService {
     @Value("${app.apiKey}")
     private String rootApiKey;
 
+    /**
+     *
+     * @param user contains detailed information about the user
+     * @param urls  a list of the urls that the user attempts to convert to SYL links
+     * @return a list of GenerateLinkResponse that has originalUrl,matchType,
+     * ecpc, publisherId,link, merchantName;
+     */
     public List<GenerateLinkResponse> createLinks(User user, List<String> urls) {
 
         List<GenerateLinkResponse> sylLinks = new ArrayList<>();
@@ -62,6 +71,12 @@ public class ConnexityService {
         return sylLinks;
     }
 
+    /**
+     *
+     * @param countryCode a county code that specify the merchant country
+     * @return a list of MerchantResponseItem that contains merchantId ,merchantName, merchantUrl
+     */
+
     public List<MerchantResponseItem> getMerchants(String countryCode) {
 
         if(Strings.isNullOrEmpty(countryCode)) {
@@ -88,6 +103,13 @@ public class ConnexityService {
 
         return response.getActiveMerchantsResponse();
     }
+
+    /**
+     *
+     * @param user contains detailed information about the user
+     * @param url  an original url
+     * @return a GetEcpcResponse that contains a list of EcpcResponseItem with the userId
+     */
 
     public GetEcpcResponse getEcpc(User user, String url) {
         String baseUrl = "http://api.shopyourlikes.com/api/link/ecpc?url=";

@@ -11,12 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
+/**
+ * This class is all the API calls for Links controller
+ */
 @RestController
 @RequestMapping("/api/links")
 public class LinksController {
     @Autowired
     protected LinksService linksService;
 
+    /**
+     *
+     * @param currentUser current user's information
+     * @param page
+     * @param size
+     * @return a list PagedResponse of LinkResponse
+     */
     @GetMapping("/mylinks")
     public PagedResponse<LinkResponse> getLinks(@CurrentUser Object currentUser,
                                                 @RequestParam(value="page",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
@@ -24,12 +34,24 @@ public class LinksController {
         return linksService.getAllLinks(currentUser, page, size);
     }
 
+    /**
+     *
+     * @param currentUser current user information
+     * @param url
+     * @return the EcpcResponse
+     */
     @GetMapping("/ecpc")
     public EcpcResponse getEcpc(@CurrentUser Object currentUser,
                                 @RequestParam(value="url") String url) {
         return linksService.getEcpc(currentUser, url);
     }
 
+    /**
+     *
+     * @param currentUser current user's information
+     * @param request link creation request from the user
+     * @return ResponseEntity.ok with createLinksResponse if it is successful otherwise return ResponseEntity.badRequest()
+     */
     @PostMapping("/create")
     public ResponseEntity<?> generateLinks(@CurrentUser Object currentUser,
                                            @Valid @RequestBody CreateLinksRequest request) {

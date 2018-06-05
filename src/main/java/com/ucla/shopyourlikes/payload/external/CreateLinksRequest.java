@@ -4,6 +4,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * This class contains all information about the CreateLinksRequest object ,including all the getters and setters.
+ */
 public class CreateLinksRequest {
 
     @NotNull

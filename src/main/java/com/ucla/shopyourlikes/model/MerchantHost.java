@@ -5,6 +5,9 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This class contains all information about the MerchantHost object,including all the getters and setters.
+ */
 @Embeddable
 public class MerchantHost {
 

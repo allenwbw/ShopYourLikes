@@ -7,6 +7,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 
+/**
+ * JwtTokenProvider that uses to generate token and validate token for the user
+ */
 @Component
 public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
@@ -17,6 +20,11 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
+    /**
+     *
+     * @param authentication
+     * @return authenticated Jwt token
+     */
     public String generateToken(Authentication authentication){
         String user_id = authentication.getPrincipal().toString();
         Date now = new Date();
@@ -30,6 +38,11 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     *
+     * @param token
+     * @return userId from the Jwt token
+     */
     public Integer getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
@@ -38,6 +51,11 @@ public class JwtTokenProvider {
         return Integer.parseInt(claims.getSubject());
     }
 
+    /**
+     *
+     * @param authToken
+     * @return true if the token is valid false otherwise
+     */
     public boolean validateToken(String authToken){
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * This class has the authentication API calls.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -36,6 +39,12 @@ public class AuthController {
     @Autowired
     protected JwtTokenProvider tokenProvider;
 
+    /**
+     *
+     * @param loginRequest contains the user apiKey and UserId
+     * @return if either the api key or userId is empty then return HttpStatus.BAD_REQUEST
+     * otherwise ResponseEntity.ok with the Jwt token
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest){
 

@@ -2,6 +2,9 @@ package com.ucla.shopyourlikes.payload.internal;
 
 import java.util.List;
 
+/**
+ * This class contains all information about the GetEcpcResponse object,including all the getters and setters.
+ */
 public class GetEcpcResponse {
 
     private Integer publisherId;

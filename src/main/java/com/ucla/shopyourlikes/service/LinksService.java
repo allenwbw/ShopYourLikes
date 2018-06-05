@@ -14,7 +14,6 @@ import com.ucla.shopyourlikes.repository.UserRepository;
 import com.ucla.shopyourlikes.util.AppConstants;
 import com.ucla.shopyourlikes.util.ModelMapper;
 import com.ucla.shopyourlikes.util.Utils;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class include all the link service method calls.
+ */
 @Service
 public class LinksService {
     @Autowired
@@ -53,6 +55,13 @@ public class LinksService {
         }
     }
 
+    /**
+     *
+     * @param currentUser current user's information
+     * @param page
+     * @param size
+     * @return a list PagedResponse of LinkResponse
+     */
     public PagedResponse<LinkResponse> getAllLinks(Object currentUser, int page, int size){
         validatePageNumberAndSize(page, size);
         User user = userRepository.findByUserId(Integer.parseInt(currentUser.toString()));
@@ -72,6 +81,13 @@ public class LinksService {
                 links.getSize(), links.getTotalElements(), links.getTotalPages(), links.isLast());
 
     }
+
+    /**
+     *
+     * @param currentUser current user's information
+     * @param urls a list of urls
+     * @return CreateLinksResponse that contains a of list of LinkResponse
+     */
 
     public CreateLinksResponse createLinks(Object currentUser, List<String> urls) {
 
@@ -102,6 +118,13 @@ public class LinksService {
         return createLinksResponse;
 
     }
+
+    /**
+     *
+     * @param currentUser current user's information
+     * @param url single url
+     * @return EcpcResponse that contains the url and ecpc
+     */
 
     public EcpcResponse getEcpc(Object currentUser, String url)
     {

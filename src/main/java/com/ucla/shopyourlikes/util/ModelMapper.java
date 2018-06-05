@@ -12,7 +12,15 @@ import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
 
 import java.util.Date;
 
+/**
+ *  This class contains all the object mapper that maps from one object to another object
+ */
 public class ModelMapper {
+    /**
+     *
+     * @param link
+     * @return the mapped LinkResponse object from link
+     */
     public static LinkResponse mapLinkToLinkResponse(Link link){
         LinkResponse linkResponse = new LinkResponse();
         linkResponse.setUserId(link.getLinkId().getUserId());
@@ -29,11 +37,23 @@ public class ModelMapper {
         return linkResponse;
     }
 
+    /**
+     *
+     * @param obj
+     * @return the mapped CreateLinksResponse object from the param
+     */
     public static CreateLinksResponse mapCreateLinkResponse(Object obj){
         CreateLinksResponse createLinksResponse = new CreateLinksResponse();
         return createLinksResponse;
     }
 
+    /**
+     *
+     * @param generateLinkResponse
+     * @param userId
+     * @param merchant
+     * @return return the mapped Link object from the LinkResponse
+     */
     public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId, Merchant merchant) {
         Link link = new Link();
         link.setCreationDate(Utils.sqlDateString(new Date()));
@@ -51,6 +71,11 @@ public class ModelMapper {
         return link;
     }
 
+    /**
+     *
+     * @param response
+     * @return the mapped Merchant object from MerchantResponseItem
+     */
     public static Merchant mapActiveMerchantResponse(MerchantResponseItem response) {
         Merchant merchant = new Merchant();
         merchant.setMerchantId(response.getMerchantId());
@@ -59,6 +84,11 @@ public class ModelMapper {
         return merchant;
     }
 
+    /**
+     *
+     * @param response
+     * @return the mapped EcpcResponse object from GetEcpcResponse
+     */
     public static EcpcResponse mapEcpcResponse(GetEcpcResponse response) {
         EcpcResponse ecpcResponse = new EcpcResponse();
         EcpcResponseItem item = response.getEcpcList().get(0);

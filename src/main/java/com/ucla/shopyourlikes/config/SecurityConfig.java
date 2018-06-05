@@ -20,7 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+/**
+ * SecurityConfig class for our service application
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -34,11 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     *
+     * @param authenticationManagerBuilder
+     * @throws Exception when it fails
+     */
     @Autowired
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.authenticationProvider(this.customAuthenticationProvider);
     }
+
+    /**
+     *
+     * @return AuthenticationManager
+     * @throws Exception
+     */
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -46,6 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         return super.authenticationManagerBean();
     }
 
+    /**
+     *
+     * @param http HttpSecurity
+     * @throws Exception if it fails
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

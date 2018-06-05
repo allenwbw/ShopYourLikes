@@ -1,5 +1,8 @@
 package com.ucla.shopyourlikes.payload.external;
 
+/**
+ * This class contains all information about the UserSummary object,including all the getters and setters.
+ */
 public class UserSummary {
     private String userId;
 

@@ -2,6 +2,9 @@ package com.ucla.shopyourlikes.payload.external;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * This class contains all information about the LoginRequest object,including all the getters and setters.
+ */
 public class LoginRequest {
     @NotBlank
     private String userId;

@@ -4,6 +4,10 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * This class contains all information about the linkId object,including all the getters and setters.
+ */
+
 @Embeddable
 public class LinkId implements Serializable{
     @NotNull
@@ -14,10 +18,18 @@ public class LinkId implements Serializable{
     @Column(columnDefinition = "CHAR(40)")
     private String hash;
 
+    /**
+     * default constructor with no params
+     */
     public LinkId() {
 
     }
 
+    /**
+     * constructor with params
+     * @param userId
+     * @param hash
+     */
     public LinkId(Integer userId, String hash){
         this.userId = userId;
         this.hash = hash;

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-
+/**
+ * This class contains all information about the merchant object, including all the getters and setters.
+ */
 @Entity
 @Table(name = "merchants")
 public class Merchant{

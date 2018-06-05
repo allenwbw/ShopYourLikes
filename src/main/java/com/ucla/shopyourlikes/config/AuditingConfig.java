@@ -10,9 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+/**
+ * AuditingConfig class
+ */
 @Configuration
 @EnableJpaAuditing
 public class AuditingConfig {
+
+    /**
+     *
+     * @return a list AuditorAware of Integer
+     */
     // That's all here for now. We'll add more auditing configurations later.
     @Bean
     public AuditorAware<Integer> auditorProvider() {
@@ -21,7 +29,16 @@ public class AuditingConfig {
 
 }
 
+/**
+ *  SpringSecurityAuditAwareImpl class
+ */
+
 class SpringSecurityAuditAwareImpl implements AuditorAware<Integer> {
+
+    /**
+     *
+     * @return Integer for the CurrentAuditor
+     */
     @Override
     public Optional<Integer> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

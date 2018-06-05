@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+/**
+ * This class contains all the merchant service calls.
+ */
 @Service
 public class MerchantService {
     @Autowired
@@ -18,6 +21,9 @@ public class MerchantService {
     @Autowired
     protected ConnexityService connexityService;
 
+    /**
+     * Initialization for the merchant repository
+     */
     @PostConstruct
     private void init()
     {
@@ -33,6 +39,12 @@ public class MerchantService {
         }
         merchantRepository.flush();
     }
+
+    /**
+     *
+     * @param merchantId
+     * @return the merchant
+     */
 
     public Merchant getMerchantById(Integer merchantId)
     {

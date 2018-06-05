@@ -2,6 +2,9 @@ package com.ucla.shopyourlikes.payload.external;
 
 import java.time.Instant;
 
+/**
+ * This class contains all information about the LinkResponse object,including all the getters and setters.
+ */
 public class LinkResponse {
     private Integer userId;
     private String hash;

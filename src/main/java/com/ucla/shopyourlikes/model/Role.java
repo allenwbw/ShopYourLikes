@@ -3,6 +3,9 @@ package com.ucla.shopyourlikes.model;
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
+/**
+ * This class contains all information about the Role object,including all the getters and setters.
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

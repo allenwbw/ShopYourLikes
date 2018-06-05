@@ -1,5 +1,8 @@
 package com.ucla.shopyourlikes.payload.internal;
 
+/**
+ * This class contains all information about the EcpcResponseItem object,including all the getters and setters.
+ */
 public class EcpcResponseItem {
 
     private String originalUrl;

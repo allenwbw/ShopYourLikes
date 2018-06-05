@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-
+/**
+ * This class contains all information about the User object, including all the getters and setters.
+ */
 @Entity
 @Table(name = "users")
 public class User{
@@ -40,10 +42,18 @@ public class User{
             fetch = FetchType.LAZY)
     private List<Link> links = new ArrayList<Link>();
 
+    /**
+     * default constructor with no params
+     */
     public User() {
 
     }
 
+    /**
+     * constructor with params
+     * @param userId
+     * @param apiKey
+     */
     public User(Integer userId, String apiKey){
         this.userId = userId;
         this.apiKey = apiKey;

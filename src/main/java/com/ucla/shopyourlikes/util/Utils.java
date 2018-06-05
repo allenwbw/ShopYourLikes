@@ -12,17 +12,36 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *  Common utilities functions for the entire project
+ */
 public class Utils {
+
+    /**
+     *
+     * @param date
+     * @return the string of SQL Date from Date
+     */
     public static String sqlDateString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return dateFormat.format(date);
     }
 
+    /**
+     *
+     * @param url SYL link
+     * @return the hash from the SYL link
+     */
     public static String extractHash(String url) {
         if(url.isEmpty()) return "";
         return url.substring(url.lastIndexOf("/") +1, url.indexOf("?"));
     }
 
+    /**
+     *
+     * @param url SYL link
+     * @return the merchant host from the SYL link
+     */
     public static MerchantHost extractHost(String url) {
 
         try {
@@ -54,6 +73,12 @@ public class Utils {
         return host;
     }
 
+    /**
+     *
+     * @param value
+     * @return encoded url
+     * @throws UnsupportedEncodingException
+     */
     public static String encodeUrl(String value) throws UnsupportedEncodingException{
         return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
     }

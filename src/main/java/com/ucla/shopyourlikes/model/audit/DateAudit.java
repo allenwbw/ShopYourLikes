@@ -10,6 +10,9 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.Instant;
 
+/**
+ * DateAudit abstract class that responsible for creation date
+ */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
@@ -24,18 +27,34 @@ public abstract class DateAudit implements Serializable {
     @LastModifiedDate
     private Instant updatedAt;
 
+    /**
+     *
+     * @return Instant createdAt
+     */
     public Instant getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     *
+     * @param createdAt
+     */
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
+    /**
+     *
+     * @return Instant updatedAt
+     */
     public Instant getUpdatedAt() {
         return updatedAt;
     }
 
+    /**
+     *
+     * @param updatedAt
+     */
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }

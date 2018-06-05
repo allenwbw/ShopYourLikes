@@ -9,12 +9,28 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.NamedQuery;
 
+/**
+ * MerchantRepository that provides client to find the merchant
+ */
 @Repository
 public interface MerchantRepository extends JpaRepository<Merchant, Long> {
 
+    /**
+     *
+     * @param merchantId
+     * @return the merchant that matches the param
+     */
     Merchant getByMerchantId(Integer merchantId);
 
+    /**
+     *
+     * @param host
+     * @return the merchant that matches the param
+     */
     Merchant getMerchantByMerchantHost(MerchantHost host);
 
+    /**
+     * delete all in Batch
+     */
     void deleteAllInBatch();
 }
