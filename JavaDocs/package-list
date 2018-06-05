@@ -1,0 +1,12 @@
+com.ucla.shopyourlikes
+com.ucla.shopyourlikes.config
+com.ucla.shopyourlikes.controller
+com.ucla.shopyourlikes.exception
+com.ucla.shopyourlikes.model
+com.ucla.shopyourlikes.model.audit
+com.ucla.shopyourlikes.payload.external
+com.ucla.shopyourlikes.payload.internal
+com.ucla.shopyourlikes.repository
+com.ucla.shopyourlikes.security
+com.ucla.shopyourlikes.service
+com.ucla.shopyourlikes.util
