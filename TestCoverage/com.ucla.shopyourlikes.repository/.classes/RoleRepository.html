@@ -1,0 +1,79 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RoleRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ucla.shopyourlikes.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RoleRepository (com.ucla.shopyourlikes.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">RoleRepository$MockitoMock$1430849022</td>
+  </tr>
+  <tr>
+    <td class="name">RoleRepository$MockitoMock$1430849022$auxiliary$cy5mVEGC</td>
+  </tr>
+  <tr>
+    <td class="name">RoleRepository$MockitoMock$1430849022$auxiliary$wavQlOlV</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ucla.shopyourlikes.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ucla.shopyourlikes.model.Role;
+<i>4</i>&nbsp;import com.ucla.shopyourlikes.model.RoleName;
+<i>5</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.Optional;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; *  RoleRepository that provides client to find the Role
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;@Repository
+<i>14</i>&nbsp;public interface RoleRepository extends JpaRepository&lt;Role, Long&gt; {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     *
+<i>18</i>&nbsp;     * @param rolename
+<i>19</i>&nbsp;     * @return Role that matches the param
+<i>20</i>&nbsp;     */
+<i>21</i>&nbsp;    Optional&lt;Role&gt; findByName(RoleName rolename);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-06-04 19:10</div>
+</div>
+</body>
+</html>

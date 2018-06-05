@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ModelMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ucla.shopyourlikes.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ModelMapper (com.ucla.shopyourlikes.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ModelMapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.1%
+  </span>
+  <span class="absValue">
+    (35/ 38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ucla.shopyourlikes.util;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ucla.shopyourlikes.model.Link;
+<i>4</i>&nbsp;import com.ucla.shopyourlikes.model.Merchant;
+<i>5</i>&nbsp;import com.ucla.shopyourlikes.payload.external.EcpcResponse;
+<i>6</i>&nbsp;import com.ucla.shopyourlikes.payload.internal.MerchantResponseItem;
+<i>7</i>&nbsp;import com.ucla.shopyourlikes.payload.external.CreateLinksResponse;
+<i>8</i>&nbsp;import com.ucla.shopyourlikes.payload.internal.EcpcResponseItem;
+<i>9</i>&nbsp;import com.ucla.shopyourlikes.payload.internal.GenerateLinkResponse;
+<i>10</i>&nbsp;import com.ucla.shopyourlikes.payload.external.LinkResponse;
+<i>11</i>&nbsp;import com.ucla.shopyourlikes.payload.internal.GetEcpcResponse;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import java.util.Date;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; *  This class contains all the object mapper that maps from one object to another object
+<i>17</i>&nbsp; */
+<b class="nc"><i>18</i>&nbsp;public class ModelMapper {</b>
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     *
+<i>21</i>&nbsp;     * @param link
+<i>22</i>&nbsp;     * @return the mapped LinkResponse object from link
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    public static LinkResponse mapLinkToLinkResponse(Link link){
+<b class="fc"><i>25</i>&nbsp;        LinkResponse linkResponse = new LinkResponse();</b>
+<b class="fc"><i>26</i>&nbsp;        linkResponse.setUserId(link.getLinkId().getUserId());</b>
+<b class="fc"><i>27</i>&nbsp;        linkResponse.setHash(link.getLinkId().getHash());</b>
+<b class="fc"><i>28</i>&nbsp;        linkResponse.setCreationDate(link.getCreationDate());</b>
+<b class="fc"><i>29</i>&nbsp;        linkResponse.setEarnings(link.getEarnings());</b>
+<b class="fc"><i>30</i>&nbsp;        linkResponse.setRedirects(link.getRedirects());</b>
+<b class="fc"><i>31</i>&nbsp;        linkResponse.setEcpc(link.getEcpc());</b>
+<b class="fc"><i>32</i>&nbsp;        linkResponse.setIgImageUrl(link.getIgImageUrl());</b>
+<b class="fc"><i>33</i>&nbsp;        linkResponse.setOriginalUrl(link.getOriginalUrl());</b>
+<b class="fc"><i>34</i>&nbsp;        linkResponse.setMerchantName(link.getMerchantName());</b>
+<b class="fc"><i>35</i>&nbsp;        linkResponse.setName(link.getName());</b>
+<b class="fc"><i>36</i>&nbsp;        linkResponse.setLink(link.getUrl());</b>
+<b class="fc"><i>37</i>&nbsp;        return linkResponse;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     *
+<i>42</i>&nbsp;     * @param obj
+<i>43</i>&nbsp;     * @return the mapped CreateLinksResponse object from the param
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public static CreateLinksResponse mapCreateLinkResponse(Object obj){
+<b class="nc"><i>46</i>&nbsp;        CreateLinksResponse createLinksResponse = new CreateLinksResponse();</b>
+<b class="nc"><i>47</i>&nbsp;        return createLinksResponse;</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    /**
+<i>51</i>&nbsp;     *
+<i>52</i>&nbsp;     * @param generateLinkResponse
+<i>53</i>&nbsp;     * @param userId
+<i>54</i>&nbsp;     * @param merchant
+<i>55</i>&nbsp;     * @return return the mapped Link object from the LinkResponse
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public static Link mapGenerateLinkRepsonse(GenerateLinkResponse generateLinkResponse, Integer userId, Merchant merchant) {
+<b class="fc"><i>58</i>&nbsp;        Link link = new Link();</b>
+<b class="fc"><i>59</i>&nbsp;        link.setCreationDate(Utils.sqlDateString(new Date()));</b>
+<b class="fc"><i>60</i>&nbsp;        link.setEcpc(generateLinkResponse.getEcpc());</b>
+<b class="fc"><i>61</i>&nbsp;        link.setEarnings(0.0f);</b>
+<b class="fc"><i>62</i>&nbsp;        link.setOriginalUrl(generateLinkResponse.getOriginalUrl());</b>
+<b class="fc"><i>63</i>&nbsp;        link.setUrl(generateLinkResponse.getLink());</b>
+<b class="fc"><i>64</i>&nbsp;        link.setUserId(userId);</b>
+<b class="fc"><i>65</i>&nbsp;        link.setRedirects(0);</b>
+<b class="fc"><i>66</i>&nbsp;        if(merchant != null) {</b>
+<b class="fc"><i>67</i>&nbsp;            link.setMerchantName(merchant.getMerchantName());</b>
+<b class="fc"><i>68</i>&nbsp;            link.setMerchantId(merchant.getMerchantId());</b>
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;        //link.setMerchant(merchant);
+<b class="fc"><i>71</i>&nbsp;        return link;</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     *
+<i>76</i>&nbsp;     * @param response
+<i>77</i>&nbsp;     * @return the mapped Merchant object from MerchantResponseItem
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    public static Merchant mapActiveMerchantResponse(MerchantResponseItem response) {
+<b class="fc"><i>80</i>&nbsp;        Merchant merchant = new Merchant();</b>
+<b class="fc"><i>81</i>&nbsp;        merchant.setMerchantId(response.getMerchantId());</b>
+<b class="fc"><i>82</i>&nbsp;        merchant.setMerchantName(response.getMerchantName());</b>
+<b class="fc"><i>83</i>&nbsp;        merchant.setMerchantHost(Utils.extractHost(response.getMerchantUrl()));</b>
+<b class="fc"><i>84</i>&nbsp;        return merchant;</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    /**
+<i>88</i>&nbsp;     *
+<i>89</i>&nbsp;     * @param response
+<i>90</i>&nbsp;     * @return the mapped EcpcResponse object from GetEcpcResponse
+<i>91</i>&nbsp;     */
+<i>92</i>&nbsp;    public static EcpcResponse mapEcpcResponse(GetEcpcResponse response) {
+<b class="fc"><i>93</i>&nbsp;        EcpcResponse ecpcResponse = new EcpcResponse();</b>
+<b class="fc"><i>94</i>&nbsp;        EcpcResponseItem item = response.getEcpcList().get(0);</b>
+<b class="fc"><i>95</i>&nbsp;        ecpcResponse.setUrl(item.getOriginalUrl());</b>
+<b class="fc"><i>96</i>&nbsp;        ecpcResponse.setEcpc(item.getEcpc());</b>
+<b class="fc"><i>97</i>&nbsp;        return ecpcResponse;</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-06-04 19:10</div>
+</div>
+</body>
+</html>

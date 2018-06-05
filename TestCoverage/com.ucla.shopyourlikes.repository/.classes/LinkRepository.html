@@ -1,0 +1,96 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LinkRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ucla.shopyourlikes.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LinkRepository (com.ucla.shopyourlikes.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">LinkRepository$MockitoMock$1174305014</td>
+  </tr>
+  <tr>
+    <td class="name">LinkRepository$MockitoMock$1174305014$auxiliary$1ap86q8T</td>
+  </tr>
+  <tr>
+    <td class="name">LinkRepository$MockitoMock$1174305014$auxiliary$ao7tVMvq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ucla.shopyourlikes.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ucla.shopyourlikes.model.LinkId;
+<i>4</i>&nbsp;import com.ucla.shopyourlikes.model.Link;
+<i>5</i>&nbsp;import org.springframework.data.domain.Page;
+<i>6</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>7</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>8</i>&nbsp;import org.springframework.data.domain.Pageable;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;import java.util.Optional;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; *  LinkRepository that provides user access to find the link
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;@Repository
+<i>16</i>&nbsp;public interface LinkRepository extends JpaRepository&lt;Link, LinkId&gt; {
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     *
+<i>20</i>&nbsp;     * @param userId
+<i>21</i>&nbsp;     * @param pageable
+<i>22</i>&nbsp;     * @return a list page of Link for the param
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    Page&lt;Link&gt; findByLinkIdUserId(Integer userId, Pageable pageable);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     * @param linkId
+<i>29</i>&nbsp;     * @return the link with the param
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    Optional&lt;Link&gt; findByLinkId(LinkId linkId);
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     *
+<i>35</i>&nbsp;     * @param userId
+<i>36</i>&nbsp;     * @return the count of the link by UserId
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    long countByLinkIdUserId(Integer userId);
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-06-04 19:10</div>
+</div>
+</body>
+</html>
