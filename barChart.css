@@ -1,0 +1,53 @@
+.chart-container {
+	/* position: relative; */
+	width: 100%;
+	display: flex;
+	overflow: auto;
+}
+
+.card {
+	padding: 5px;
+	margin: 5px;
+	border: 0px;
+	border-radius: 2px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+	width: 100%;
+	overflow: auto;
+}
+
+.chart-title {
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid #e3eaef;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.chart-tooltip {
+	position: absolute;
+	/* text-align: center; */
+	padding: 10px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #0c4973;
+	background: #fff;
+	/* opacity: 0; */
+	z-index: 1000;
+	border: 0px;
+	border-radius: 2px;
+	pointer-events: none;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+	white-space: nowrap;
+}
+
+.chart-tooltip .chart-tooltip--title {
+	padding-bottom: 3px;
+	margin-bottom: 3px;
+	border-bottom: 1px solid #0c4973;
+}
+
+.chart-tooltip .chart-tooltip--title h4 {
+	margin-bottom: 0px;
+	color: #0c4973;
+}

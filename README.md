@@ -1,123 +1,21 @@
-# Shop Your Likes Journal Server
+### Visuals for react app using d3
 
-The back-end RESTful api server for the Shop Your Likes Journal web application.
+### Assuming you already have webpack setup for your app, you just need to copy the components from this code base
+#### Install d3js using npm/yarn --> npm i --save d3
+#### You are already using antd, so that is not a new dependency
+####
+#### Integration steps
+1. Copy the components in your source code
+2. BarChart component is the important one and its a simple wrapper component given correct props value it will create a bar chart
+3. chartConstants.js has config options for chart, and we will use config from this as per chart type selection.
+4. sampleChartData.js has sample data sets for all type of charts, in your case server should return the same dataset.
+5. StatsDashboard.js has an example usage of the component and chart selector dropdown
+6. Use StatsDashboard.js in your app and replace with your data api calls to get chart data
+7. package.json has all the dependencies listed
 
-The front-end application is maintained at <https://github.com/allenwbw/shopyourlikes-frontend>
+### This is working application once all the npm packages are installed, you should be able to view the visuals with sample data
+1. Copy the code from the attached zip
+2. Go to root directory of codebase, where package.json is and run `npm i`
+3. Once all the packages are installed, run app using `npm start`
 
-You can find a live demo of the application here <http://cs130.syljournel.com>
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-You need JDK version 10 and MySQL to run and build this application. 
-
-### Setting up MySQL
-1. **Create MySQL database**
-
-    ```
-    create database SHOPYOURLIKES;
-    ```
-
-2. **Change MySQL username and password as per your MySQL installation (root account)**
-
-    + open `src/main/resources/application.properties`
-    + change `spring.datasource.username` and `spring.datasource.password` properties as per your mysql installation
-
-
-### Running the app
-You can run the back-end app by using the following command under the root directory of the app
-
-    mvn spring-boot:run
-
-The server will start on port 5000.
-    
-    
-## Running Units Tests
-
-The purpose of the unit test is a level of software testing where individual units/components of a software 
-are tested.<br/>
-#####Mockito Test Framwork <br/>
-We use Mocktio framework pattern to write units test for our service application. It allows us
-to create mock object when we have multiple object dependency inside one method. This really allows
-us to focus testing the behavior of our service application. <br/>
-
-To understand more about Behavior-driven development:
-* [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) - Behavior-driven development
-* [Mockito](http://static.javadoc.io/org.mockito/mockito-core/2.18.3/org/mockito/BDDMockito.html)
-
-```
-       @Mock
-       private MerchantRepository merchantRepository;
-   
-       @Mock
-       private  ConnexityService connexityService;
-   
-       private MerchantService merchantService;
-   
-       @Before
-       public void setupMock() {
-           MockitoAnnotations.initMocks(this);
-           merchantService = new MerchantService();
-           merchantService.connexityService = connexityService;
-           merchantService.merchantRepository = merchantRepository;
-       }
-   
-       @Test
-       public void testMockCreation() {
-           assertNotNull(connexityService);
-           assertNotNull(merchantRepository);
-       }
-    
-      @Test
-      public void testGetMerchantById_goodcase() {
-          //set up
-          Merchant fake =  new Merchant();
-          MerchantHost merchantHost = new MerchantHost();
-          merchantHost.setMerchantDomain("www");
-          merchantHost.setMerchantTld("cs130");
-          fake.setMerchantId(222);
-          fake.setMerchantName("ucla");
-          fake.setMerchantHost(merchantHost);
-  
-          // return the desired object
-          when(merchantService.getMerchantById(anyInt())).thenReturn(fake);
-          Merchant merchant =  merchantService.getMerchantById(anyInt());
-  
-          // assert the expected and actual results
-          Integer i =  new Integer(222);
-          assertEquals(i,merchant.getMerchantId());
-          assertEquals("ucla",merchant.getMerchantName());
-          assertEquals(merchantHost.getMerchantDomain(),merchant.getMerchantHost().getMerchantDomain());
-          assertEquals(merchantHost.getMerchantTld(),merchant.getMerchantHost().getMerchantTld());
-      }
-```
-## Deployment
-
-Build the app with the following command
-
-```
-mvn package
-```
-
-The built jar file will be in the directory `target/ShopYourLikes-0.0.1-SNAPSHOT.jar`
-
-The jar file will be deployable to any machine with JDK 10 installed.
-
-## Built With
-
-* [Maven](https://maven.apache.org/) - Dependency Management
-
-* [Spring Boot](https://projects.spring.io/spring-boot/) - Spring application boostrapper
-
-## Authors
-
-* **Bowei Wang** 
-* **Alex Gold** 
-* **Qinhao Xu** 
-* **Robert Posada** 
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
+### Thanks ajkaushik~
