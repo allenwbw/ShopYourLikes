@@ -118,6 +118,8 @@ The jar file will be deployable to any machine with JDK 10 installed.
 * **Alex Gold** 
 * **Qinhao Xu** 
 * **Robert Posada** 
+* **Qiusi Shen**
+* **Dezhi Huang**
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
